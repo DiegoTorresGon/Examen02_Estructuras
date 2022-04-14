@@ -1,5 +1,6 @@
 #include <tests.h>
 #include <imp.h>
+#include <mem.h>
 
 bool a_make_num() {
     aexp_t *a = aexp_make_num(666);
@@ -266,6 +267,7 @@ bool b_make_less() {
     return false;
 }
 
+/*
 bool b_make_and() {
     check(0 == 1, "Prueba erronea, escribe casos que tengan sentido");
     return true;
@@ -337,9 +339,41 @@ bool b_eval_neg() {
  fail:
     return false;
 }
+*/ 
+
+///  PROBANDO MEMORIA
+bool test_mem_assign_and_eval() {
+    Memory* m = mem_make();
+
+    uint64_t n = 100;
+    for(uint64_t i = 0; i < n; ++i) {
+        aexp_t* value = aexp_make_num(i);
+        mem_assign(m, value, value);
+        aexp_free(value);
+    }
+
+    for(uint64_t i = 0; i < n; ++i) {
+        aexp_t* value = aexp_make_num(i);
+        bool test = i == mem_eval(m, value);
+        aexp_free(value);
+        check(test, "Expected equal values.");
+    }
+
+    for(uint64_t i = n; i < 2 * n; ++i) {
+        aexp_t* value = aexp_make_num(i);
+        bool test = 0 == mem_eval(m, value);
+        aexp_free(value);
+        check(test, "Expected value 0 on uninitialized position.");
+    }
+
+    mem_free(m);
+    return true;
+fail:
+    mem_free(m);
+    return false;
+}
 
 int main() {
-    fprintf(stderr, "- Probando expresiones aritméticas\n");
     run_test(a_make_num);
     run_test(a_make_add);
     run_test(a_make_sub);
@@ -352,6 +386,7 @@ int main() {
     run_test(b_make_truefalse);
     run_test(b_make_equal);
     run_test(b_make_less);
+    /*
     run_test(b_make_and);
     run_test(b_make_or);
     run_test(b_make_neg);
@@ -361,5 +396,9 @@ int main() {
     run_test(b_eval_and);
     run_test(b_eval_or);
     run_test(b_eval_neg);
-    /* run_test(misdudas); */
+    run_test(misdudas); 
+    */
+
+    run_test(test_mem_assign_and_eval);
+    
 }

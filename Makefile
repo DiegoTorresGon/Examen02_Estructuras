@@ -17,7 +17,7 @@ all: test-imp
 test-imp: $(TESTDIR)/imp.o
 	@./$<
 
-$(TESTDIR)/imp.o: $(TESTDIR)/imp.c $(SRCDIR)/imp.o
+$(TESTDIR)/imp.o: $(TESTDIR)/imp.c $(SRCDIR)/imp.o $(SRCDIR)/mem.o
 	@echo "Compilando casos de prueba de lenguaje IMP"
 	@$(CC) $(CFLAGS) $(TESTFLAGS) -o $@ $^
 
@@ -26,6 +26,11 @@ $(SRCDIR)/%.o: $(SRCDIR)/%.c
 	@$(CC) $(CFLAGS) $(TESTFLAGS) -c -o $@ $<
 
 $(SRCDIR)/imp.o: $(INCDIR)/imp.h
+
+
+$(SRCDIR)/mem.o: $(SRCDIR)/mem.c
+	@echo "Compilando $<"
+	@$(CC) $(CFLAGS) $(TESTFLAGS) -c -o $@ $<
 
 clean:
 	@rm -rf test/*.o src/*.o
