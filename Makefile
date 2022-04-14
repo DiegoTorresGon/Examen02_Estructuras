@@ -21,6 +21,10 @@ $(TESTDIR)/imp.o: $(TESTDIR)/imp.c $(SRCDIR)/imp.o $(SRCDIR)/mem.o
 	@echo "Compilando casos de prueba de lenguaje IMP"
 	@$(CC) $(CFLAGS) $(TESTFLAGS) -o $@ $^
 
+build: $(TESTDIR)/imp.c $(SRCDIR)/imp.o $(SRCDIR)/mem.o
+	@echo "Compilando casos de prueba de lenguaje IMP"
+	@$(CC) $(CFLAGS) -g3 -O0 -fsanitize=address -fsanitize=undefined $(TESTDIR)/imp.c $(SRCDIR)/imp.o $(SRCDIR)/mem.o -o $(TESTDIR)/imp.o
+
 $(SRCDIR)/%.o: $(SRCDIR)/%.c
 	@echo "Compilando $<"
 	@$(CC) $(CFLAGS) $(TESTFLAGS) -c -o $@ $<
