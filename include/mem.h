@@ -5,25 +5,25 @@
 #include <stdlib.h>
 #include <imp.h>
 
-typedef struct Memory Memory;
+typedef struct mem_t mem_t;
 
 /**
  * @brief Creates a new heap allocated memory list. 
  * 
- * @return Memory* Valid memory location or NULL is allocation was unsuccesful. 
+ * @return mem_t* Valid memory location or NULL is allocation was unsuccesful. 
  */
-Memory* mem_make();
+mem_t* mem_make();
 
 /**
  * @brief Assigns the evaluation of value_exp to the position
  *  that is evaluated from index_exp. 
  * 
- * @param m Memory* to be modified with new assignment. 
+ * @param m mem_t* to be modified with new assignment. 
  * @param index_exp Arithmethic expression with index value. 
  * @param value_exp Arithmethic expression with assignment value. 
- * @return Memory* Pointer to m. NULL if operation was unsuccesful. 
+ * @return mem_t* Pointer to m. NULL if operation was unsuccesful. 
  */
-Memory* mem_assign(Memory* m, aexp_t* index_exp, aexp_t* value_exp); 
+mem_t* mem_assign(mem_t* m, aexp_t* index_exp, aexp_t* value_exp); 
 
 /**
  * @brief Returns the value stored at that index.
@@ -33,13 +33,13 @@ Memory* mem_assign(Memory* m, aexp_t* index_exp, aexp_t* value_exp);
  * @param index_exp Arithmethic expression with index. 
  * @return uint64_t Value stores at that index. 
  */
-uint64_t mem_eval(Memory* m, aexp_t* index_exp);
+uint64_t mem_eval(mem_t* m, aexp_t* index_exp);
 
 /**
  * @brief Deletes all data inside the memory list.
  * 
  * @param m Memory list to be freed. 
  */
-void mem_free(Memory* m);
+void mem_free(mem_t* m);
 
 #endif

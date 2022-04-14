@@ -1,14 +1,14 @@
-#include "mem.h"
+#include <mem.h>
 
 //The memory of a program will be represented with a linked list with sentinel.
-struct Memory {
-    Memory* next;
+struct mem_t {
+    mem_t* next;
     uint64_t value;
     uint64_t pos; 
 };
 
-Memory* mem_make() {
-    Memory* sent = (Memory*)malloc(sizeof(Memory));
+mem_t* mem_make() {
+    mem_t* sent = (mem_t*)malloc(sizeof(mem_t));
 
     if (sent == NULL) return NULL;
    
@@ -18,11 +18,11 @@ Memory* mem_make() {
     return sent;
 } 
 
-Memory* mem_assign(Memory* m, aexp_t* index_exp, aexp_t* value_exp) {
+mem_t* mem_assign(mem_t* m, aexp_t* index_exp, aexp_t* value_exp) {
     uint64_t index = aexp_eval(index_exp);
     uint64_t value = aexp_eval(value_exp); 
     
-    Memory* iter = m;
+    mem_t* iter = m;
 
     while(iter->next != NULL && iter->next->pos <= index) iter = iter->next;
 
@@ -31,7 +31,7 @@ Memory* mem_assign(Memory* m, aexp_t* index_exp, aexp_t* value_exp) {
         return m;
     } 
 
-    Memory* new_pos = mem_make();
+    mem_t* new_pos = mem_make();
     if (new_pos == NULL) return NULL;
 
     new_pos->next = m->next;
@@ -42,7 +42,7 @@ Memory* mem_assign(Memory* m, aexp_t* index_exp, aexp_t* value_exp) {
     return m; 
 }
 
-uint64_t mem_eval(Memory* m, aexp_t* index_exp) {
+uint64_t mem_eval(mem_t* m, aexp_t* index_exp) {
     uint64_t index = aexp_eval(index_exp);
 
     while(m->next != NULL) {
@@ -53,10 +53,10 @@ uint64_t mem_eval(Memory* m, aexp_t* index_exp) {
     return 0;
 }
 
-void mem_free(Memory* m) {
+void mem_free(mem_t* m) {
     if (m == NULL) return;
 
-    Memory* next = m->next;
+    mem_t* next = m->next;
     free(m);
 
     while(next != NULL) {

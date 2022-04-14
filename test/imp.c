@@ -343,7 +343,7 @@ bool b_eval_neg() {
 
 ///  PROBANDO MEMORIA
 bool test_mem_assign_and_eval() {
-    Memory* m = mem_make();
+    mem_t* m = mem_make();
 
     uint64_t n = 100;
     for(uint64_t i = 0; i < n; ++i) {
