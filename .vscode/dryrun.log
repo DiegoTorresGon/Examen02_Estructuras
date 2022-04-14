@@ -1,0 +1,5 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/media/Win_drive/Users/diego/Documents/Materias UNISON/Estructuras de Datos/Examen02_Estructuras'
+./test/imp.o
+make: Leaving directory '/media/Win_drive/Users/diego/Documents/Materias UNISON/Estructuras de Datos/Examen02_Estructuras'
+ 
