@@ -117,4 +117,33 @@ void bexp_free(bexp_t *b);
  */
 bool bexp_eval(bexp_t *b);
 
+
+/***************************/
+/* EXPRESIONES DE PROGRAMA */
+/***************************/
+
+struct pexp_t;
+typedef struct pexp_t pexp_t;
+
+/*
+  P -> skip | x[A]:=A | (P;P) | (while B do P) | if (B then P else P)
+
+  Una expresión de Programa puede ser skip (una instruccion que no hace algo), 
+  x[A]:=A (asignacion a la memoria), (P;P) (una secuencia de programas),
+  (while B do P) (repeticion) y if (B then P else P) (condicional). 
+
+  Los siguientes predicados determinan qué tipo de expresión es P.
+  Toda expresión de programa satisface únicamente uno de estos
+  predicados.
+ */
+
+
+
+
+/*
+  Los siguientes constructores permiten crear una expresion de Programa a partir de
+  expresiones Aritmeticas o Booleanas, asi como expresiones de Programa.
+ */
+
+
 #endif  /* ED_IMP_H_ */

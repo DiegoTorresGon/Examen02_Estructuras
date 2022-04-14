@@ -276,3 +276,44 @@ bool bexp_eval(bexp_t *b) {
 
     return bexp_eval(bexp_bleft(b)) || bexp_eval(bexp_bright(b));
 }
+
+/***************************/
+/* EXPRESIONES DE PROGRAMA */
+/***************************/
+typedef enum {
+    PEXP_SKP,
+    PEXP_ASS,
+    PEXP_SQN,
+    PEXP_CCL,
+    PEXP_CON,
+} PEXP_TYPE;
+
+typedef struct pexp_t {
+    PEXP_TYPE type;
+    union {
+        struct {
+            struct aexp_t *left;
+            struct aexp_t *right;
+        };
+        struct {
+            union{
+                struct pexp_t *pleft;
+                struct bexp_t *bleft;
+            };
+            struct pexp_t *pright;
+        };
+        struct{
+            struct bexp_t *condition;
+            struct pexp_t *ptrue;
+            struct pexp_t *pfalse;
+        };
+    };
+} pexp_t;
+
+//Predicados
+
+
+//Selectores
+
+//Constructores
+
