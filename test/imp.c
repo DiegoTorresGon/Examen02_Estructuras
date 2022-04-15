@@ -205,17 +205,6 @@ bool a_eval_mul() {
     return false;
 }
 
-bool misdudas() {
-    bexp_t *bt = bexp_make_true();
-    bexp_t *bf = bexp_make_false();
-    check(bt != bf, "Esperaba que true fuera distinto a false");
-    
-    return true;
-
- fail:
-    return false;
-}
-
 bool b_make_truefalse() {
     bexp_t *bt = bexp_make_true();
     bexp_t *bf = bexp_make_false();
@@ -267,79 +256,193 @@ bool b_make_less() {
     return false;
 }
 
-/*
-bool b_make_and() {
-    check(0 == 1, "Prueba erronea, escribe casos que tengan sentido");
+bool b_eval_truefalse() {
+    bexp_t* fal = bexp_make_false();
+    bexp_t* tru = bexp_make_true();
+
+    check(!bexp_eval(fal), "Esparaba valor falso");
+    check(bexp_eval(tru), "Esperaba valor verdadero");
+
+    bexp_free(fal);
+    bexp_free(tru);
     return true;
 
  fail:
+    bexp_free(fal);
+    bexp_free(tru);
+    return false;
+}
+
+bool b_make_and() {
+    bexp_t* fal = bexp_make_false();
+
+    bexp_t* a = bexp_make_and(fal, fal);
+
+    check(bexp_is_and(a), "Esperaba que fuera una expresión tipo AND.");
+
+    bexp_free(fal);
+    bexp_free(a);
+    return true;
+ fail:
+    bexp_free(fal);
+    bexp_free(a);
     return false;
 }
 
 bool b_make_or() {
-    check(0 == 1, "Prueba erronea, escribe casos que tengan sentido");
-    return true;
+    bexp_t* tru = bexp_make_true();
 
+    bexp_t* a = bexp_make_or(tru, tru);
+
+    check(bexp_is_or(a), "Esperaba que fuera una expresión tipo OR.");
+
+    bexp_free(a);
+    bexp_free(tru);
+    return true;
  fail:
+    bexp_free(a);
+    bexp_free(tru);
     return false;
 }
 
 bool b_make_neg() {
-    check(0 == 1, "Prueba erronea, escribe casos que tengan sentido");
+    bexp_t* tru = bexp_make_true();
+
+    bexp_t* a = bexp_make_neg(tru);
+
+    check(bexp_is_neg(a), "Esperaba que fuera una expresión tipo NOT.");
+    
+    bexp_free(a);
+    bexp_free(tru);
     return true;
-
  fail:
-    return false;
-}
-
-bool b_eval_truefalse() {
-    check(0 == 1, "Prueba erronea, escribe casos que tengan sentido");
-    return true;
-
- fail:
+    bexp_free(a);
+    bexp_free(tru);
     return false;
 }
 
 bool b_eval_equal() {
-    check(0 == 1, "Prueba erronea, escribe casos que tengan sentido");
-    return true;
+    bexp_t* fal = bexp_make_equal(aexp_make_num(0), aexp_make_num(1));
+    bexp_t* tru = bexp_make_equal(aexp_make_num(1), aexp_make_num(1));
 
+
+    check(!bexp_eval(fal), "Experaba valor falso");
+    check(bexp_eval(tru), "Esperaba valor verdadero");
+    
+    bexp_free(fal);
+    bexp_free(tru);
+    return true;
  fail:
+    bexp_free(fal);
+    bexp_free(tru);
     return false;
 }
 
 bool b_eval_less() {
-    check(0 == 1, "Prueba erronea, escribe casos que tengan sentido");
-    return true;
+    bexp_t* less = bexp_make_less(aexp_make_num(0), aexp_make_num(1));
+    bexp_t* equal = bexp_make_less(aexp_make_num(1), aexp_make_num(1));
+    bexp_t* greater = bexp_make_less(aexp_make_num(2), aexp_make_num(1));
 
+
+    check(bexp_eval(less), "Experaba valor verdadero");
+    check(!bexp_eval(equal), "Esperaba valor falso");
+    check(!bexp_eval(greater), "Esperaba valor falso");
+    
+    bexp_free(less);
+    bexp_free(equal);
+    bexp_free(greater);
+    return true;
  fail:
+    bexp_free(less);
+    bexp_free(equal);
+    bexp_free(greater);
     return false;
 }
 
 bool b_eval_and() {
-    check(0 == 1, "Prueba erronea, escribe casos que tengan sentido");
-    return true;
+    bexp_t* fal = bexp_make_false();
+    bexp_t* tru = bexp_make_true();
 
+    bexp_t* a = bexp_make_and(tru, tru);
+
+    check(bexp_eval(a), "Esperaba valor verdadero");
+    
+    bexp_free(a);
+    a = bexp_make_and(tru, fal);
+    check(!bexp_eval(a), "Esperaba valor falso");
+    
+    bexp_free(a);
+    a = bexp_make_and(fal, tru);
+    check(!bexp_eval(a), "Esperaba valor falso");
+
+    bexp_free(a);
+    a = bexp_make_and(fal, fal);
+    check(!bexp_eval(a), "Esperaba valor falso");
+
+    bexp_free(a);
+    bexp_free(fal);
+    bexp_free(tru);
+    return true;
  fail:
+    bexp_free(a);
+    bexp_free(fal);
+    bexp_free(tru);
     return false;
 }
 
 bool b_eval_or() {
-    check(0 == 1, "Prueba erronea, escribe casos que tengan sentido");
-    return true;
+    bexp_t* fal = bexp_make_false();
+    bexp_t* tru = bexp_make_true();
 
+    bexp_t* a = bexp_make_or(tru, tru);
+
+    check(bexp_eval(a), "Esperaba valor verdadero");
+    
+    bexp_free(a);
+    a = bexp_make_or(tru, fal);
+    check(bexp_eval(a), "Esperaba valor verdadero");
+    
+    bexp_free(a);
+    a = bexp_make_or(fal, tru);
+    check(bexp_eval(a), "Esperaba valor verdadero");
+
+    bexp_free(a);
+    a = bexp_make_or(fal, fal);
+    check(!bexp_eval(a), "Esperaba valor falso");
+
+    bexp_free(a);
+    bexp_free(fal);
+    bexp_free(tru);
+    return true;
  fail:
+    bexp_free(a);
+    bexp_free(fal);
+    bexp_free(tru);
     return false;
 }
 
 bool b_eval_neg() {
-    check(0 == 1, "Prueba erronea, escribe casos que tengan sentido");
-    return true;
+    bexp_t* fal = bexp_make_false();
+    bexp_t* tru = bexp_make_true();
 
+    bexp_t* a = bexp_make_neg(tru);
+
+    check(!bexp_eval(a), "Esperaba valor falso");
+    
+    bexp_free(a);
+    a = bexp_make_neg(fal);
+    check(bexp_eval(a), "Esperaba valor verdadero");
+
+    bexp_free(a);
+    bexp_free(fal);
+    bexp_free(tru);
+    return true;
  fail:
+    bexp_free(a);
+    bexp_free(fal);
+    bexp_free(tru);
     return false;
 }
-*/ 
 
 
 ///  PROBANDO MEMORIA
@@ -400,6 +503,7 @@ fail:
 }
 
 int main() {
+    fprintf(stderr, "- Probando expresiones aritméticas\n");
     run_test(a_make_num);
     run_test(a_make_add);
     run_test(a_make_sub);
@@ -412,19 +516,16 @@ int main() {
     run_test(b_make_truefalse);
     run_test(b_make_equal);
     run_test(b_make_less);
-    /*
+    run_test(b_eval_truefalse);
     run_test(b_make_and);
     run_test(b_make_or);
     run_test(b_make_neg);
-    run_test(b_eval_truefalse);
     run_test(b_eval_equal);
     run_test(b_eval_less);
     run_test(b_eval_and);
     run_test(b_eval_or);
     run_test(b_eval_neg);
-    run_test(misdudas); 
-    */
-
+    fprintf(stderr, "- Probando memoria\n");
     run_test(test_mem_assign_and_eval);
     
 }
