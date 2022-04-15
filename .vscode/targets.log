@@ -5,9 +5,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Thu Apr 14 14:38:32 2022
+# Make data base, printed on Fri Apr 15 11:16:12 2022
 
 # Variables
 
@@ -54,7 +53,7 @@ SNAP_DATA = /var/snap/code/94
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:164445
+JOURNAL_STREAM = 8:53358
 # makefile (from 'Makefile', line 13)
 CFLAGS = -std=c18 -Wall -Wpedantic -Werror -Wextra -I$(INCDIR)/
 # environment
@@ -86,7 +85,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 _ = /snap/code/94/usr/share/code/code
 # environment
-MANAGERPID = 26351
+MANAGERPID = 2180
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -102,7 +101,7 @@ PATH = /home/diego/anaconda3/bin:/home/diego/anaconda3/condabin:/home/diego/.car
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/diego-Nitro-AN515-53:@/tmp/.ICE-unix/26625,unix/diego-Nitro-AN515-53:/tmp/.ICE-unix/26625
+SESSION_MANAGER = local/diego-Nitro-AN515-53:@/tmp/.ICE-unix/2457,unix/diego-Nitro-AN515-53:/tmp/.ICE-unix/2457
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -124,7 +123,7 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = ddde506bb3094c228e7ac4e399bfc8dc
+INVOCATION_ID = c0e5dea92c36451383399ac692bbf8f6
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/94/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
@@ -136,7 +135,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 29942
+GIO_LAUNCHED_DESKTOP_FILE_PID = 5879
 # automatic
 %F = $(notdir $%)
 # environment
@@ -154,7 +153,7 @@ PWD = /media/Win_drive/Users/diego/Documents/Materias UNISON/Estructuras de Dato
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 26591
+SSH_AGENT_PID = 2423
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -212,7 +211,7 @@ CC = gcc
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d56d1e4f-bf4f-4e7a-8428-bcb105a17a69.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-be91b087-ed92-4c71-9c4a-ab8b1615e053.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -251,7 +250,6 @@ MFLAGS = -pqrR
 *D = $(patsubst %/,%,$(dir $*))
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
- 
 # environment
 GDK_BACKEND = x11
 # environment
@@ -292,6 +290,7 @@ _CE_M =
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
 WINDOWPATH = 2
+ 
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # environment
@@ -303,7 +302,7 @@ LC_ADDRESS = es_MX.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 29991
+VSCODE_PID = 5928
 # environment
 _CE_CONDA = 
 # variable set hash-table stats:
@@ -334,7 +333,7 @@ src/%.o: src/%.c
 src/imp.o: src/imp.c include/imp.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'imp'
-#  Last modified 2022-04-14 14:37:48.7063332
+#  Last modified 2022-04-15 11:13:10.6594899
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 29):
@@ -353,7 +352,7 @@ all: test-imp
 # Not a target:
 src/mem.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-14 13:38:41.4456704
+#  Last modified 2022-04-15 10:39:50.9026876
 #  File has been updated.
 #  Successfully updated.
 
@@ -366,14 +365,14 @@ src/mem.c:
 # Not a target:
 test/imp.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-14 13:34:59.0560944
+#  Last modified 2022-04-15 11:13:06.7871494
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-14 14:37:43.9458492
+#  Last modified 2022-04-15 11:15:51.5366462
 #  File has been updated.
 #  Successfully updated.
 
@@ -388,14 +387,14 @@ build: test/imp.c src/imp.o src/mem.o
 # Not a target:
 include/imp.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-07 01:45:07
+#  Last modified 2022-04-15 11:00:39.5168604
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/imp.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-07 01:45:07
+#  Last modified 2022-04-14 18:33:41.1269467
 #  File has been updated.
 #  Successfully updated.
 
@@ -414,7 +413,7 @@ clean:
 
 src/mem.o: src/mem.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-04-14 14:37:48.7616842
+#  Last modified 2022-04-15 11:13:10.7340353
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 36):
@@ -423,9 +422,8 @@ src/mem.o: src/mem.c
 
 test/imp.o: test/imp.c src/imp.o src/mem.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-04-14 14:38:23.3928446
+#  Last modified 2022-04-15 11:13:11.0509206
 #  File has been updated.
- 
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 21):
 	@echo "Compilando casos de prueba de lenguaje IMP"
@@ -472,6 +470,6 @@ test-imp: test/imp.o
 # strcache performance: lookups = 54 / hit rate = 44%
 # hash-table stats:
 # Load=30/8192=0%, Rehash=0, Collisions=2/54=4%
-# Finished Make data base on Thu Apr 14 14:38:32 2022
+# Finished Make data base on Fri Apr 15 11:16:12 2022
 
  

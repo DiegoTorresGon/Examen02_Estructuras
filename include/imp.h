@@ -88,7 +88,14 @@ bool bexp_is_or(bexp_t *b);
 bool bexp_is_neg(bexp_t *b);
 
 /*
-  Pendiente: documentar...
+  Los siguientes métodos son selectores para acceder a los miembros internos
+  de una expresión booleanas. 
+
+  bexp_aleft y bexp_aright corresponden a expresiones de tipo igualdad y menor que.
+
+  bexp_bleft y bexp_bright corresponden a expresiones de tipo AND y OR.
+
+  bexp_nchild corresponde a una expresión de negación.
  */
 aexp_t *bexp_aleft(bexp_t *b);
 aexp_t *bexp_aright(bexp_t *b);
@@ -97,7 +104,12 @@ bexp_t *bexp_bright(bexp_t *b);
 bexp_t *bexp_nchild(bexp_t *b);
 
 /*
-  Pendiente: documentar...
+  De acuerdo a los posibles tipos de expresiones booleanas:
+
+  B -> true | false | (A = A) | (A < A) | (B and B) | (B or B) | not B .
+
+  Se encuentran los constructores para generar expresiones booleanas
+  de cada tipo.
  */
 bexp_t *bexp_make_true();
 bexp_t *bexp_make_false();
@@ -107,13 +119,19 @@ bexp_t *bexp_make_and(bexp_t *left, bexp_t *right);
 bexp_t *bexp_make_or(bexp_t *left, bexp_t *right);
 bexp_t *bexp_make_neg(bexp_t *child);
 
-/*
-  Pendiente: documentar...
+/**
+ * @brief Libera la memoria que utiliza una expresión booleana
+ *        incluyendo a cualquiera de sus hijos.
+ * 
+ * @param b Expresión booleanas por liberar.
  */
 void bexp_free(bexp_t *b);
 
-/*
-  Pendiente: documentar...
+/**
+ * @brief Evalua el valor de verdad de una expresión booleana.
+ * 
+ * @param b Expresión booleana por evaluar.
+ * @return bool Valor de verdad de la expresión. 
  */
 bool bexp_eval(bexp_t *b);
 
