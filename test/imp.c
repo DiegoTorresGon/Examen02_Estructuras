@@ -368,6 +368,22 @@ bool test_mem_assign_and_eval() {
         check(test, "Expected equal values.");
     }
 
+    //This next part tests when we update already existing positions on memory.
+    for(uint64_t i = 0; i < n; ++i) {
+        aexp_t* value = aexp_make_num(2 * i);
+        aexp_t* index = aexp_make_num(i);
+        mem_assign(m, index, value);
+        aexp_free(value);
+        aexp_free(index);
+    }
+
+    for(uint64_t i = 0; i < n; ++i) {
+        aexp_t* value = aexp_make_num(i);
+        bool test = 2 * i == mem_eval(m, value);
+        aexp_free(value);
+        check(test, "Expected equal values.");
+    }
+    
     for(uint64_t i = n; i < 2 * n; ++i) {
         aexp_t* value = aexp_make_num(i);
         bool test = 0 == mem_eval(m, value);
