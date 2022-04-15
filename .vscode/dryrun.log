@@ -1,11 +1,6 @@
-make --dry-run --always-make --keep-going --print-directory
+make build --dry-run --keep-going --print-directory
 make: Entering directory '/media/Win_drive/Users/diego/Documents/Materias UNISON/Estructuras de Datos/Examen02_Estructuras'
-echo "Compilando src/imp.c"
-gcc -std=c18 -Wall -Wpedantic -Werror -Wextra -Iinclude/ -g3 -O0 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -c -o src/imp.o src/imp.c
-echo "Compilando src/mem.c"
-gcc -std=c18 -Wall -Wpedantic -Werror -Wextra -Iinclude/ -g3 -O0 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -c -o src/mem.o src/mem.c
 echo "Compilando casos de prueba de lenguaje IMP"
-gcc -std=c18 -Wall -Wpedantic -Werror -Wextra -Iinclude/ -g3 -O0 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -o test/imp.o test/imp.c src/imp.o src/mem.o
-./test/imp.o
+gcc -std=c18 -Wall -Wpedantic -Werror -Wextra -Iinclude/ -g3 -O0 -fsanitize=address -fsanitize=undefined test/imp.c src/imp.o src/mem.o -o test/imp.o
 make: Leaving directory '/media/Win_drive/Users/diego/Documents/Materias UNISON/Estructuras de Datos/Examen02_Estructuras'
  

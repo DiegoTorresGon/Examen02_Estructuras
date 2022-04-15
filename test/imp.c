@@ -347,12 +347,21 @@ bool test_mem_assign_and_eval() {
     mem_t* m = mem_make();
 
     uint64_t n = 100;
-    for(uint64_t i = 0; i < n; ++i) {
+    for(uint64_t i = 1; i < n; i += 2) {
         aexp_t* value = aexp_make_num(i);
         mem_assign(m, value, value);
         aexp_free(value);
     }
 
+    for(uint64_t i = 0; i < n; i += 2) {
+        aexp_t* value = aexp_make_num(i);
+        mem_assign(m, value, value);
+        aexp_free(value);
+    }
+
+    //This part is for testing if memory locations are being placed in order.
+    //This is because the mem_eval function starts searching in the first value stored
+    //and stops if it finds an element with a bigger index than the one that it's looking for.
     for(uint64_t i = 0; i < n; ++i) {
         aexp_t* value = aexp_make_num(i);
         bool test = i == mem_eval(m, value);
@@ -360,6 +369,22 @@ bool test_mem_assign_and_eval() {
         check(test, "Expected equal values.");
     }
 
+    //This next part tests when we update already existing positions on memory.
+    for(uint64_t i = 0; i < n; ++i) {
+        aexp_t* value = aexp_make_num(2 * i);
+        aexp_t* index = aexp_make_num(i);
+        mem_assign(m, index, value);
+        aexp_free(value);
+        aexp_free(index);
+    }
+
+    for(uint64_t i = 0; i < n; ++i) {
+        aexp_t* value = aexp_make_num(i);
+        bool test = 2 * i == mem_eval(m, value);
+        aexp_free(value);
+        check(test, "Expected equal values.");
+    }
+    
     for(uint64_t i = n; i < 2 * n; ++i) {
         aexp_t* value = aexp_make_num(i);
         bool test = 0 == mem_eval(m, value);
