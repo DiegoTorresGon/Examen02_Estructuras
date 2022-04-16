@@ -445,6 +445,82 @@ bool b_eval_neg() {
 }
 
 
+bool test_make_skip(){
+    pexp_t *p=pexp_make_skip();
+    check(p!=NULL, "Expected enough memory");
+    check(pexp_is_skip(p), "Expected skip type"); // No compila a falta de predicado
+    // Falta destructor
+    return true;
+fail:
+    return false;
+}
+
+bool test_make_assign(){
+    pexp_t *p=pexp_make_assign(aexp_make_num(2),
+                                aexp_make_num(3));
+    check(p!=NULL, "Expected enough memory");
+    // Nada de esto compila porque faltan los predicados y selectores
+    check(pexp_is_assign(p), "Expected skip type"); 
+    check(pexp_aleft(p)!=NULL, "Expected enough memory + assignation on left pointer");
+    check(pexp_aright(p)!=NULL, "Expected enough memory + assignation on right pointer");
+    check(aexp_is_num(pexp_aleft(p)), "Expected numeric type on left");
+    check(aexp_is_num(pexp_aright(p)), "Expected numeric type on right");
+    check(aexp_num(pexp_aleft(p)) == 2, "Expected 2");
+    check(aexp_num(pexp_aright(p)) == 3, "Expected 3");
+    //Falta destructor
+    return true;
+fail:
+    return false;
+}
+
+bool test_make_sequence(){
+    pexp_t *p=pexp_make_sequence(pexp_make_skip(),
+                                pexp_make_skip());
+    check(p!=NULL, "Expected enough memory");
+    // Nada compila porque faltan predicados y selectores 
+    check(pexp_is_sequence(p), "Expected skip type"); 
+    check(pexp_pleft(p)!=NULL, "Expected enough memory + assignation on left pointer");
+    check(pexp_pright(p)!=NULL, "Expected enough memory + assignation on right pointer");
+    check(pexp_is_skip(pexp_pleft(p)), "Expected skip type on left");
+    check(pexp_is_skip(pexp_pright(p)), "Expected skip type on right");
+    //Falta destructor
+    return true;
+fail:
+    return false;
+}
+bool test_make_cicle(){
+    pexp_t *p=pexp_make_cicle(bexp_make_or(bexp_make_true(), bexp_make_true()),
+                                pexp_make_skip());
+    check(p!=NULL, "Expected enough memory");
+    // Nada compila porque faltan predicados y selectores 
+    check(pexp_is_sequence(p), "Expected skip type"); 
+    check(pexp_bleft(p)!=NULL, "Expected enough memory + assignation on left pointer");
+    check(pexp_pright(p)!=NULL, "Expected enough memory + assignation on right pointer");
+    check(bexp_is_or(pexp_bleft(p)), "Expected or type on left");
+    check(pexp_is_skip(pexp_pright(p)), "Expected skip type on right");
+    //Falta destructor
+    return true;
+fail:
+    return false;
+}
+
+bool test_make_condition(){
+    pexp_t *p=pexp_make_conditional(bexp_make_or(bexp_make_true(), bexp_make_true()),
+                                        pexp_make_skip(), pexp_make_skip());
+    check(p!=NULL, "Expected enough memory");
+    // Nada compila porque faltan predicados y selectores 
+    check(pexp_is_conditional(p), "Expected skip type"); 
+    check(pexp_bleft(p)!=NULL, "Expected enough memory + assignation on left pointer");
+    check(pexp_pmid(p)!=NULL, "Expected enough memory + assignation on mid pointer")
+    check(pexp_pright(p)!=NULL, "Expected enough memory + assignation on right pointer");
+    check(bexp_is_or(pexp_bleft(p)), "Expected or type on left");
+    check(pexp_is_skip(pexp_pright(p)), "Expected skip type on right");
+    check(pexp_is_skip(pexp_pmid(p)), "Expected skip type on mid");
+    //Falta destructor
+    return true;
+fail:
+    return false;
+}
 ///  PROBANDO MEMORIA
 bool test_mem_assign_and_eval() {
     mem_t* m = mem_make();
