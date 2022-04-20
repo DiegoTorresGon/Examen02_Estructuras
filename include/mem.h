@@ -3,7 +3,7 @@
 
 #include <inttypes.h>
 #include <stdlib.h>
-#include <imp.h>
+#include "imp.h"
 
 #ifndef MEM_TYPE
 #define MEM_TYPE
@@ -12,6 +12,7 @@ struct mem_t;
 typedef struct mem_t mem_t;
 
 #endif
+
 /**
  * @brief Creates a new heap allocated memory list. 
  * 

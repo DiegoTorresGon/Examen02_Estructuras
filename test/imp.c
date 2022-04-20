@@ -1,6 +1,6 @@
-#include <tests.h>
 #include <imp.h>
 #include <mem.h>
+#include <tests.h>
 
 bool a_make_num() {
     aexp_t *a = aexp_make_num(666);
@@ -79,15 +79,15 @@ bool a_eval_num() {
     aexp_t *a;
 
     a = aexp_make_num(0);
-    check(aexp_eval(a) == 0, "Esperaba que 0 = 0");
+    check(aexp_eval(a, NULL) == 0, "Esperaba que 0 = 0");
     aexp_free(a);
 
     a = aexp_make_num(666);
-    check(aexp_eval(a) == 666, "Esperaba que 666 = 666");
+    check(aexp_eval(a, NULL) == 666, "Esperaba que 666 = 666");
     aexp_free(a);
 
     a = aexp_make_num(42);
-    check(aexp_eval(a) == 42, "Esperaba que 42 = 42");
+    check(aexp_eval(a, NULL) == 42, "Esperaba que 42 = 42");
     aexp_free(a);
     
     return true;
@@ -103,25 +103,25 @@ bool a_eval_add() {
     a = aexp_make_add(aexp_make_num(0),
                       aexp_make_num(0));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 0, "Esperaba que 0 + 0 = 0");
+    check(aexp_eval(a, NULL) == 0, "Esperaba que 0 + 0 = 0");
     aexp_free(a);
 
     a = aexp_make_add(aexp_make_num(0),
                       aexp_make_num(666));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 666, "Esperaba que 0 + 666 = 666");
+    check(aexp_eval(a, NULL) == 666, "Esperaba que 0 + 666 = 666");
     aexp_free(a);
 
     a = aexp_make_add(aexp_make_num(42),
                       aexp_make_num(666));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 708, "Esperaba que 42 + 666 = 708");
+    check(aexp_eval(a, NULL) == 708, "Esperaba que 42 + 666 = 708");
     aexp_free(a);
 
     a = aexp_make_add(aexp_make_num(666),
                       aexp_make_num(42));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 708, "Esperaba que 666 + 42 = 708");
+    check(aexp_eval(a, NULL) == 708, "Esperaba que 666 + 42 = 708");
     aexp_free(a);
     
     return true;
@@ -137,25 +137,25 @@ bool a_eval_sub() {
     a = aexp_make_sub(aexp_make_num(0),
                       aexp_make_num(0));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 0, "Esperaba que 0 - 0 = 0");
+    check(aexp_eval(a, NULL) == 0, "Esperaba que 0 - 0 = 0");
     aexp_free(a);
 
     a = aexp_make_sub(aexp_make_num(0),
                       aexp_make_num(666));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 0, "Esperaba que 0 - 666 = 0");
+    check(aexp_eval(a, NULL) == 0, "Esperaba que 0 - 666 = 0");
     aexp_free(a);
 
     a = aexp_make_sub(aexp_make_num(42),
                       aexp_make_num(666));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 0, "Esperaba que 42 - 666 = 0");
+    check(aexp_eval(a, NULL) == 0, "Esperaba que 42 - 666 = 0");
     aexp_free(a);
 
     a = aexp_make_sub(aexp_make_num(666),
                       aexp_make_num(42));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 624, "Esperaba que 666 - 42 = 624");
+    check(aexp_eval(a, NULL) == 624, "Esperaba que 666 - 42 = 624");
     aexp_free(a);
     
     return true;
@@ -171,31 +171,31 @@ bool a_eval_mul() {
     a = aexp_make_mul(aexp_make_num(0),
                       aexp_make_num(0));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 0, "Esperaba que 0 * 0 = 0");
+    check(aexp_eval(a, NULL) == 0, "Esperaba que 0 * 0 = 0");
     aexp_free(a);
 
     a = aexp_make_mul(aexp_make_num(0),
                       aexp_make_num(666));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 0, "Esperaba que 0 * 666 = 0");
+    check(aexp_eval(a, NULL) == 0, "Esperaba que 0 * 666 = 0");
     aexp_free(a);
 
     a = aexp_make_mul(aexp_make_num(1),
                       aexp_make_num(666));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 666, "Esperaba que 1 * 666 = 666");
+    check(aexp_eval(a, NULL) == 666, "Esperaba que 1 * 666 = 666");
     aexp_free(a);
 
     a = aexp_make_mul(aexp_make_num(42),
                       aexp_make_num(666));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 27972, "Esperaba que 42 * 666 = 27972");
+    check(aexp_eval(a, NULL) == 27972, "Esperaba que 42 * 666 = 27972");
     aexp_free(a);
 
     a = aexp_make_mul(aexp_make_num(666),
                       aexp_make_num(42));
     check(a != NULL, "Esperaba suficiente memoria");
-    check(aexp_eval(a) == 27972, "Esperaba que 666 * 42 = 27972");
+    check(aexp_eval(a, NULL) == 27972, "Esperaba que 666 * 42 = 27972");
     aexp_free(a);
     
     return true;
@@ -260,8 +260,8 @@ bool b_eval_truefalse() {
     bexp_t* fal = bexp_make_false();
     bexp_t* tru = bexp_make_true();
 
-    check(!bexp_eval(fal), "Esparaba valor falso");
-    check(bexp_eval(tru), "Esperaba valor verdadero");
+    check(!bexp_eval(fal, NULL), "Esparaba valor falso");
+    check(bexp_eval(tru, NULL), "Esperaba valor verdadero");
 
     bexp_free(fal);
     bexp_free(tru);
@@ -326,8 +326,8 @@ bool b_eval_equal() {
     bexp_t* tru = bexp_make_equal(aexp_make_num(1), aexp_make_num(1));
 
 
-    check(!bexp_eval(fal), "Experaba valor falso");
-    check(bexp_eval(tru), "Esperaba valor verdadero");
+    check(!bexp_eval(fal, NULL), "Experaba valor falso");
+    check(bexp_eval(tru, NULL), "Esperaba valor verdadero");
     
     bexp_free(fal);
     bexp_free(tru);
@@ -344,9 +344,9 @@ bool b_eval_less() {
     bexp_t* greater = bexp_make_less(aexp_make_num(2), aexp_make_num(1));
 
 
-    check(bexp_eval(less), "Experaba valor verdadero");
-    check(!bexp_eval(equal), "Esperaba valor falso");
-    check(!bexp_eval(greater), "Esperaba valor falso");
+    check(bexp_eval(less, NULL), "Experaba valor verdadero");
+    check(!bexp_eval(equal, NULL), "Esperaba valor falso");
+    check(!bexp_eval(greater, NULL), "Esperaba valor falso");
     
     bexp_free(less);
     bexp_free(equal);
@@ -365,19 +365,19 @@ bool b_eval_and() {
 
     bexp_t* a = bexp_make_and(tru, tru);
 
-    check(bexp_eval(a), "Esperaba valor verdadero");
+    check(bexp_eval(a, NULL), "Esperaba valor verdadero");
     
     bexp_free(a);
     a = bexp_make_and(tru, fal);
-    check(!bexp_eval(a), "Esperaba valor falso");
+    check(!bexp_eval(a, NULL), "Esperaba valor falso");
     
     bexp_free(a);
     a = bexp_make_and(fal, tru);
-    check(!bexp_eval(a), "Esperaba valor falso");
+    check(!bexp_eval(a, NULL), "Esperaba valor falso");
 
     bexp_free(a);
     a = bexp_make_and(fal, fal);
-    check(!bexp_eval(a), "Esperaba valor falso");
+    check(!bexp_eval(a, NULL), "Esperaba valor falso");
 
     bexp_free(a);
     bexp_free(fal);
@@ -396,19 +396,19 @@ bool b_eval_or() {
 
     bexp_t* a = bexp_make_or(tru, tru);
 
-    check(bexp_eval(a), "Esperaba valor verdadero");
+    check(bexp_eval(a, NULL), "Esperaba valor verdadero");
     
     bexp_free(a);
     a = bexp_make_or(tru, fal);
-    check(bexp_eval(a), "Esperaba valor verdadero");
+    check(bexp_eval(a, NULL), "Esperaba valor verdadero");
     
     bexp_free(a);
     a = bexp_make_or(fal, tru);
-    check(bexp_eval(a), "Esperaba valor verdadero");
+    check(bexp_eval(a, NULL), "Esperaba valor verdadero");
 
     bexp_free(a);
     a = bexp_make_or(fal, fal);
-    check(!bexp_eval(a), "Esperaba valor falso");
+    check(!bexp_eval(a, NULL), "Esperaba valor falso");
 
     bexp_free(a);
     bexp_free(fal);
@@ -427,11 +427,11 @@ bool b_eval_neg() {
 
     bexp_t* a = bexp_make_neg(tru);
 
-    check(!bexp_eval(a), "Esperaba valor falso");
+    check(!bexp_eval(a, NULL), "Esperaba valor falso");
     
     bexp_free(a);
     a = bexp_make_neg(fal);
-    check(bexp_eval(a), "Esperaba valor verdadero");
+    check(bexp_eval(a, NULL), "Esperaba valor verdadero");
 
     bexp_free(a);
     bexp_free(fal);

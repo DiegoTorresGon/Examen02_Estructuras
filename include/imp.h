@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <inttypes.h>
-#include <mem.h>
 
 /***************************/
 /* EXPRESIONES ARITMÉTICAS */
