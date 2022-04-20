@@ -311,10 +311,34 @@ typedef struct pexp_t {
 
 
 //Selectores
-// Nota de los selectores: como los nombres de la estructura no son simplemente right o left es probable que se ocupe una condicional / switch por el tipo de 
-// p que reciba 
-
-
+pexp_t *aindex(pexp_t *p){
+    if (p->type!=PEXP_ASS) return NULL;
+    return p->index;
+}
+pexp_t *arvalue(pexp_t *p){
+    if (p->type!=PEXP_ASS) return NULL;
+    return p->rvalue;
+}
+pexp_t *pfirst(pexp_t *p){
+    if (p->type!=PEXP_SQN) return NULL;
+    return p->pfirst;
+}
+pexp_t *psecond(pexp_t *p){
+    if (p->type!=PEXP_SQN) return NULL;
+    return p->psecond;
+}
+pexp_t *bcondition(pexp_t *p){
+    if (p->type!=PEXP_WHL||p->type!=PEXP_CON) return NULL;
+    return p->condition;
+}
+pexp_t *ptrue(pexp_t *p){
+    if (p->type!=PEXP_WHL||p->type!=PEXP_CON) return NULL;
+    return p->ptrue;
+}
+pexp_t *pfalse(pexp_t *p){
+    if (p->type!=PEXP_CON) return NULL;
+    return p->pfalse;
+}
 //Constructores
 pexp_t *pexp_make_skip() {
     pexp_t *p = (pexp_t *)malloc(sizeof(pexp_t));
