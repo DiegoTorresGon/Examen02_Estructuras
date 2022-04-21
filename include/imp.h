@@ -48,7 +48,7 @@ bool aexp_is_mem(aexp_t *a);
 uint64_t aexp_num(aexp_t *a);
 aexp_t *aexp_left(aexp_t *a);
 aexp_t *aexp_right(aexp_t *a);
-uint64_t aexp_index(aexp_t *a);
+aexp_t *aexp_index(aexp_t *a);
 
 /*
   Los siguientes constructores permiten crear un natural a partir de
@@ -59,7 +59,7 @@ aexp_t *aexp_make_num(uint64_t num);
 aexp_t *aexp_make_add(aexp_t *left, aexp_t *right);
 aexp_t *aexp_make_sub(aexp_t *left, aexp_t *right);
 aexp_t *aexp_make_mul(aexp_t *left, aexp_t *right);
-aexp_t *aexp_make_mem(uint64_t index);
+aexp_t *aexp_make_mem(aexp_t *index);
 
 /*
   Para liberar el espacio en memoria que ocupa una expresión

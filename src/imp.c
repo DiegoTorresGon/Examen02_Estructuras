@@ -21,7 +21,7 @@ typedef struct aexp_t {
             struct aexp_t *left;
             struct aexp_t *right;
         };
-        uint64_t index;
+        aexp_t* index;
     };
 } aexp_t;
 
@@ -49,7 +49,7 @@ uint64_t aexp_num(aexp_t *a) {
     return a->num;
 }
 
-uint64_t aexp_index(aexp_t *a) {
+aexp_t *aexp_index(aexp_t *a) {
     return a->index;
 }
 
@@ -69,7 +69,7 @@ aexp_t *aexp_make_num(uint64_t num) {
     return a;
 }
 
-aexp_t *aexp_make_mem(uint64_t index) {
+aexp_t *aexp_make_mem(aexp_t* index) {
     aexp_t *a = (aexp_t *)malloc(sizeof(aexp_t));
     if (a == NULL) return NULL;
     a->type = AEXP_MEM;
@@ -107,7 +107,9 @@ aexp_t *aexp_make_mul(aexp_t *left, aexp_t *right) {
 void aexp_free(aexp_t *a) {
     if (a == NULL) return;
     
-    if (!aexp_is_num(a)) {
+    if (aexp_is_mem(a)) {
+        aexp_free(aexp_index(a));
+    } else if (!aexp_is_num(a)) {
         aexp_free(aexp_left(a));
         aexp_free(aexp_right(a));
     }
@@ -116,7 +118,7 @@ void aexp_free(aexp_t *a) {
 
 uint64_t aexp_eval(aexp_t *a, mem_t* m) {
     if (aexp_is_num(a)) return aexp_num(a);
-    if (aexp_is_mem(a)) return mem_eval_num(m, a->index);
+    if (aexp_is_mem(a)) return mem_eval(m, a->index);
 
     uint64_t nleft = aexp_eval(aexp_left(a), m);
     uint64_t nright = aexp_eval(aexp_right(a), m);
@@ -125,7 +127,7 @@ uint64_t aexp_eval(aexp_t *a, mem_t* m) {
     if (aexp_is_mul(a)) return nleft * nright;
 
     if (nright > nleft) return 0;
-    return nleft - nright;
+        return nleft - nright;
 }
 
 /*************************/
