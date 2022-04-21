@@ -1,3 +1,4 @@
+#include <mem.h>
 #include <imp.h>
 
 /***************************/
@@ -9,6 +10,7 @@ typedef enum {
     AEXP_ADD,
     AEXP_SUB,
     AEXP_MUL,
+    AEXP_MEM
 } AEXP_TYPE;
 
 typedef struct aexp_t {
@@ -19,6 +21,7 @@ typedef struct aexp_t {
             struct aexp_t *left;
             struct aexp_t *right;
         };
+        aexp_t* index;
     };
 } aexp_t;
 
@@ -38,8 +41,16 @@ bool aexp_is_mul(aexp_t *a) {
     return a->type == AEXP_MUL;
 }
 
+bool aexp_is_mem(aexp_t *a) {
+    return a->type == AEXP_MEM;
+}
+
 uint64_t aexp_num(aexp_t *a) {
     return a->num;
+}
+
+aexp_t *aexp_index(aexp_t *a) {
+    return a->index;
 }
 
 aexp_t *aexp_left(aexp_t *a) {
@@ -55,6 +66,14 @@ aexp_t *aexp_make_num(uint64_t num) {
     if (a == NULL) return NULL;
     a->type = AEXP_NUM;
     a->num = num;
+    return a;
+}
+
+aexp_t *aexp_make_mem(aexp_t* index) {
+    aexp_t *a = (aexp_t *)malloc(sizeof(aexp_t));
+    if (a == NULL) return NULL;
+    a->type = AEXP_MEM;
+    a->index = index;
     return a;
 }
 
@@ -88,24 +107,27 @@ aexp_t *aexp_make_mul(aexp_t *left, aexp_t *right) {
 void aexp_free(aexp_t *a) {
     if (a == NULL) return;
     
-    if (!aexp_is_num(a)) {
+    if (aexp_is_mem(a)) {
+        aexp_free(aexp_index(a));
+    } else if (!aexp_is_num(a)) {
         aexp_free(aexp_left(a));
         aexp_free(aexp_right(a));
     }
     free(a);
 }
 
-uint64_t aexp_eval(aexp_t *a) {
+uint64_t aexp_eval(aexp_t *a, mem_t* m) {
     if (aexp_is_num(a)) return aexp_num(a);
+    if (aexp_is_mem(a)) return mem_eval(m, a->index);
 
-    uint64_t nleft = aexp_eval(aexp_left(a));
-    uint64_t nright = aexp_eval(aexp_right(a));
+    uint64_t nleft = aexp_eval(aexp_left(a), m);
+    uint64_t nright = aexp_eval(aexp_right(a), m);
 
     if (aexp_is_add(a)) return nleft + nright;
     if (aexp_is_mul(a)) return nleft * nright;
 
     if (nright > nleft) return 0;
-    return nleft - nright;
+        return nleft - nright;
 }
 
 /*************************/
@@ -259,22 +281,22 @@ void bexp_free(bexp_t *b) {
     free(b);
 }
 
-bool bexp_eval(bexp_t *b) {
+bool bexp_eval(bexp_t *b, mem_t* m) {
     if (bexp_is_true(b)) return true;
     if (bexp_is_false(b)) return false;
 
-    if (bexp_is_neg(b)) return !bexp_eval(bexp_nchild(b));
+    if (bexp_is_neg(b)) return !bexp_eval(bexp_nchild(b), m);
 
     if (bexp_is_equal(b))
-        return aexp_eval(bexp_aleft(b)) == aexp_eval(bexp_aright(b));
+        return aexp_eval(bexp_aleft(b), m) == aexp_eval(bexp_aright(b), m);
 
     if (bexp_is_less(b))
-        return aexp_eval(bexp_aleft(b)) < aexp_eval(bexp_aright(b));
+        return aexp_eval(bexp_aleft(b), m) < aexp_eval(bexp_aright(b), m);
 
     if (bexp_is_and(b))
-        return bexp_eval(bexp_bleft(b)) && bexp_eval(bexp_bright(b));
+        return bexp_eval(bexp_bleft(b), m) && bexp_eval(bexp_bright(b), m);
 
-    return bexp_eval(bexp_bleft(b)) || bexp_eval(bexp_bright(b));
+    return bexp_eval(bexp_bleft(b), m) || bexp_eval(bexp_bright(b), m);
 }
 
 /***************************/
@@ -340,6 +362,7 @@ pexp_t *pfalse(pexp_t *p){
     return p->pfalse;
 }
 //Constructores
+
 pexp_t *pexp_make_skip() {
     pexp_t *p = (pexp_t *)malloc(sizeof(pexp_t));
     if (p == NULL) return NULL;
@@ -382,5 +405,9 @@ pexp_t *pexp_make_conditional(bexp_t *condition, pexp_t *ptrue, pexp_t *pfalse) 
     p->ptrue = ptrue;
     p->pfalse = pfalse;
     return p;
+
+void pexp_free(pexp_t *p) {
+    if (p == NULL) return;
+
 }
 

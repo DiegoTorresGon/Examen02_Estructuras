@@ -9,6 +9,14 @@
 /* EXPRESIONES ARITMÉTICAS */
 /***************************/
 
+#ifndef MEM_TYPE
+#define MEM_TYPE
+
+struct mem_t;
+typedef struct mem_t mem_t;
+
+#endif
+
 /*
   Una estructura de tipo `aexp_t' representa una expresión aritmética.
  */
@@ -16,7 +24,7 @@ struct aexp_t;
 typedef struct aexp_t aexp_t;
 
 /*
-  A -> N | (A + A) | (A - A) | (A * A)
+  A -> N | (A + A) | (A - A) | (A * A) 
   
   Una expresión aritmética A puede ser un natural, una suma, una resta
   o una multiplicación.
@@ -29,6 +37,7 @@ bool aexp_is_num(aexp_t *a);
 bool aexp_is_add(aexp_t *a);
 bool aexp_is_sub(aexp_t *a);
 bool aexp_is_mul(aexp_t *a);
+bool aexp_is_mem(aexp_t *a);
 
 /*
   El valor de un natural se puede obtener con el selector `aexp_num',
@@ -39,6 +48,7 @@ bool aexp_is_mul(aexp_t *a);
 uint64_t aexp_num(aexp_t *a);
 aexp_t *aexp_left(aexp_t *a);
 aexp_t *aexp_right(aexp_t *a);
+aexp_t *aexp_index(aexp_t *a);
 
 /*
   Los siguientes constructores permiten crear un natural a partir de
@@ -49,6 +59,7 @@ aexp_t *aexp_make_num(uint64_t num);
 aexp_t *aexp_make_add(aexp_t *left, aexp_t *right);
 aexp_t *aexp_make_sub(aexp_t *left, aexp_t *right);
 aexp_t *aexp_make_mul(aexp_t *left, aexp_t *right);
+aexp_t *aexp_make_mem(aexp_t *index);
 
 /*
   Para liberar el espacio en memoria que ocupa una expresión
@@ -59,7 +70,7 @@ void aexp_free(aexp_t *a);
 /*
   Evaluador de expresiones aritméticas.
  */
-uint64_t aexp_eval(aexp_t *a);
+uint64_t aexp_eval(aexp_t *a, mem_t* m);
 
 /*************************/
 /* EXPRESIONES BOOLEANAS */
@@ -133,7 +144,7 @@ void bexp_free(bexp_t *b);
  * @param b Expresión booleana por evaluar.
  * @return bool Valor de verdad de la expresión. 
  */
-bool bexp_eval(bexp_t *b);
+bool bexp_eval(bexp_t *b, mem_t* m);
 
 
 /***************************/
