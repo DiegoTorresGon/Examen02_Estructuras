@@ -54,15 +54,6 @@ uint64_t mem_eval(mem_t* m, aexp_t* index_exp) {
     return 0;
 }
 
-uint64_t mem_eval_num(mem_t* m, uint64_t index) {
-    while(m->next != NULL && m->next->pos <= index) {
-        m = m->next;
-        if (m->pos == index) return m->value; 
-    } 
-
-    return 0;
-}
-
 void mem_free(mem_t* m) {
     if (m == NULL) return;
 
