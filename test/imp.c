@@ -15,6 +15,19 @@ bool a_make_num() {
     return false;
 }
 
+bool a_make_mem() {
+    aexp_t *a = aexp_make_mem(aexp_make_num(666));
+    check(a != NULL, "Esperaba suficiente memoria");
+    check(aexp_is_mem(a), "Esperaba expresión de memoria");
+    check(aexp_eval(aexp_index(a), NULL) == 666, "Valor numérico no esperado");
+    aexp_free(a);
+    return true;
+
+ fail:
+    aexp_free(a);
+    return false;
+}
+
 bool a_make_add() {
     aexp_t *a = aexp_make_add(aexp_make_num(42),
                               aexp_make_num(666));
@@ -94,6 +107,34 @@ bool a_eval_num() {
 
  fail:
     aexp_free(a);
+    return false;
+}
+
+bool a_eval_mem() {
+    aexp_t *a;
+    mem_t* m = mem_make();
+    if(m == NULL) goto fail;
+
+    a = aexp_make_mem(aexp_make_num(0));
+    check(aexp_eval(a, m) == 0, "Esperaba que x[0] == 0");
+    
+    aexp_t* val = aexp_make_num(10);
+    mem_assign(m, aexp_index(a), val); 
+    check(aexp_eval(a, m) == 10, "Esperaba que x[0] == 10");
+
+    aexp_free(a);
+    a = aexp_make_mem(aexp_make_num(15));
+    check(aexp_eval(a, m) == 0, "Esperaba que x[15] == 0");
+
+    aexp_free(val);
+    aexp_free(a);
+    mem_free(m);
+    return true;
+
+ fail:
+    aexp_free(a);
+    aexp_free(val);
+    mem_free(m);
     return false;
 }
 
@@ -505,10 +546,12 @@ fail:
 int main() {
     fprintf(stderr, "- Probando expresiones aritméticas\n");
     run_test(a_make_num);
+    run_test(a_make_mem);
     run_test(a_make_add);
     run_test(a_make_sub);
     run_test(a_make_mul);
     run_test(a_eval_num);
+    run_test(a_eval_mem);
     run_test(a_eval_add);
     run_test(a_eval_sub);
     run_test(a_eval_mul);
