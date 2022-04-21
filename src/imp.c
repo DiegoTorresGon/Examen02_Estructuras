@@ -405,6 +405,7 @@ pexp_t *pexp_make_conditional(bexp_t *condition, pexp_t *ptrue, pexp_t *pfalse) 
     p->ptrue = ptrue;
     p->pfalse = pfalse;
     return p;
+}
 
 void pexp_free(pexp_t *p) {
     if (p == NULL) return;
