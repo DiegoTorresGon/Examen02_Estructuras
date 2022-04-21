@@ -333,11 +333,81 @@ typedef struct pexp_t {
 
 
 //Selectores
-
+pexp_t *aindex(pexp_t *p){
+    if (p->type!=PEXP_ASS) return NULL;
+    return p->index;
+}
+pexp_t *arvalue(pexp_t *p){
+    if (p->type!=PEXP_ASS) return NULL;
+    return p->rvalue;
+}
+pexp_t *pfirst(pexp_t *p){
+    if (p->type!=PEXP_SQN) return NULL;
+    return p->pfirst;
+}
+pexp_t *psecond(pexp_t *p){
+    if (p->type!=PEXP_SQN) return NULL;
+    return p->psecond;
+}
+pexp_t *bcondition(pexp_t *p){
+    if (p->type!=PEXP_WHL||p->type!=PEXP_CON) return NULL;
+    return p->condition;
+}
+pexp_t *ptrue(pexp_t *p){
+    if (p->type!=PEXP_WHL||p->type!=PEXP_CON) return NULL;
+    return p->ptrue;
+}
+pexp_t *pfalse(pexp_t *p){
+    if (p->type!=PEXP_CON) return NULL;
+    return p->pfalse;
+}
 //Constructores
+
+pexp_t *pexp_make_skip() {
+    pexp_t *p = (pexp_t *)malloc(sizeof(pexp_t));
+    if (p == NULL) return NULL;
+    p->type = PEXP_SKP;
+    return p;
+}
+
+pexp_t *pexp_make_assign(aexp_t *index, aexp_t *rvalue) {
+    pexp_t *p = (pexp_t *)malloc(sizeof(pexp_t));
+    if (p == NULL) return NULL;
+    p->type = PEXP_ASS;
+    p->index = index;
+    p->rvalue = rvalue;
+    return p;
+}
+
+pexp_t *pexp_make_sequence(pexp_t *pfirst, pexp_t *psecond) {
+    pexp_t *p = (pexp_t *)malloc(sizeof(pexp_t));
+    if (p == NULL) return NULL;
+    p->type = PEXP_SQN;
+    p->pfirst = pfirst;
+    p->psecond = psecond;
+    return p;
+}
+
+pexp_t *pexp_make_cicle(bexp_t *condition, pexp_t *ptrue) {
+    pexp_t *p = (pexp_t *)malloc(sizeof(pexp_t));
+    if (p == NULL) return NULL;
+    p->type = PEXP_WHL;
+    p->condition = condition;
+    p->ptrue= ptrue;
+    return p;
+}
+
+pexp_t *pexp_make_conditional(bexp_t *condition, pexp_t *ptrue, pexp_t *pfalse) {
+    pexp_t *p = (pexp_t *)malloc(sizeof(pexp_t));
+    if (p == NULL) return NULL;
+    p->type = PEXP_CON;
+    p->condition = condition;
+    p->ptrue = ptrue;
+    p->pfalse = pfalse;
+    return p;
+
 void pexp_free(pexp_t *p) {
     if (p == NULL) return;
-
 
 }
 
