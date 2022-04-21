@@ -32,7 +32,7 @@ $(SRCDIR)/%.o: $(SRCDIR)/%.c
 $(SRCDIR)/imp.o: $(INCDIR)/imp.h
 
 
-$(SRCDIR)/mem.o: $(SRCDIR)/mem.c
+$(SRCDIR)/mem.o: $(SRCDIR)/mem.c 
 	@echo "Compilando $<"
 	@$(CC) $(CFLAGS) $(TESTFLAGS) -c -o $@ $<
 

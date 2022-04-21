@@ -19,8 +19,8 @@ mem_t* mem_make() {
 } 
 
 mem_t* mem_assign(mem_t* m, aexp_t* index_exp, aexp_t* value_exp) {
-    uint64_t index = aexp_eval(index_exp);
-    uint64_t value = aexp_eval(value_exp); 
+    uint64_t index = aexp_eval(index_exp, m);
+    uint64_t value = aexp_eval(value_exp, m); 
     
     mem_t* iter = m;
 
@@ -44,7 +44,7 @@ mem_t* mem_assign(mem_t* m, aexp_t* index_exp, aexp_t* value_exp) {
 }
 
 uint64_t mem_eval(mem_t* m, aexp_t* index_exp) {
-    uint64_t index = aexp_eval(index_exp);
+    uint64_t index = aexp_eval(index_exp, m);
 
     while(m->next != NULL && m->next->pos <= index) {
         m = m->next;

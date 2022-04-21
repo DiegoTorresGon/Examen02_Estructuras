@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Apr 15 11:16:12 2022
+# Make data base, printed on Wed Apr 20 20:02:52 2022
 
 # Variables
 
@@ -53,7 +53,7 @@ SNAP_DATA = /var/snap/code/94
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:53358
+JOURNAL_STREAM = 8:49818
 # makefile (from 'Makefile', line 13)
 CFLAGS = -std=c18 -Wall -Wpedantic -Werror -Wextra -I$(INCDIR)/
 # environment
@@ -85,7 +85,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 _ = /snap/code/94/usr/share/code/code
 # environment
-MANAGERPID = 2180
+MANAGERPID = 2074
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -101,7 +101,7 @@ PATH = /home/diego/anaconda3/bin:/home/diego/anaconda3/condabin:/home/diego/.car
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/diego-Nitro-AN515-53:@/tmp/.ICE-unix/2457,unix/diego-Nitro-AN515-53:/tmp/.ICE-unix/2457
+SESSION_MANAGER = local/diego-Nitro-AN515-53:@/tmp/.ICE-unix/2354,unix/diego-Nitro-AN515-53:/tmp/.ICE-unix/2354
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -123,7 +123,7 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = c0e5dea92c36451383399ac692bbf8f6
+INVOCATION_ID = c2d2c6f572b44c75880e76bb9f09a480
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/94/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
@@ -135,7 +135,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 5879
+GIO_LAUNCHED_DESKTOP_FILE_PID = 4363
 # automatic
 %F = $(notdir $%)
 # environment
@@ -153,7 +153,7 @@ PWD = /media/Win_drive/Users/diego/Documents/Materias UNISON/Estructuras de Dato
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 2423
+SSH_AGENT_PID = 2320
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -211,7 +211,7 @@ CC = gcc
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-be91b087-ed92-4c71-9c4a-ab8b1615e053.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-f9ba49cb-2de8-40d0-9748-cc46a2aa0332.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -290,7 +290,6 @@ _CE_M =
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
 WINDOWPATH = 2
- 
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # environment
@@ -299,14 +298,15 @@ GJS_DEBUG_OUTPUT = stderr
 .RECIPEPREFIX := 
 # environment
 LC_ADDRESS = es_MX.UTF-8
+ 
 # environment
 LANG = C
 # environment
-VSCODE_PID = 5928
+VSCODE_PID = 4412
 # environment
 _CE_CONDA = 
 # variable set hash-table stats:
-# Load=147/1024=14%, Rehash=0, Collisions=45/189=24%
+# Load=147/1024=14%, Rehash=0, Collisions=46/193=24%
 
 # Pattern-specific Variable Values
 
@@ -333,9 +333,27 @@ src/%.o: src/%.c
 src/imp.o: src/imp.c include/imp.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'imp'
-#  Last modified 2022-04-15 11:13:10.6594899
+#  Last modified 2022-04-15 15:42:04.7428512
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := src/imp.o
+# automatic
+# % := 
+# automatic
+# * := imp
+# automatic
+# + := src/imp.c include/imp.h
+# automatic
+# | := 
+# automatic
+# < := src/imp.c
+# automatic
+# ^ := src/imp.c include/imp.h
+# automatic
+# ? := src/imp.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/18=6%
 #  recipe to execute (from 'Makefile', line 29):
 	@echo "Compilando $<"
 	@$(CC) $(CFLAGS) $(TESTFLAGS) -c -o $@ $<
@@ -347,17 +365,10 @@ all: test-imp
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
 
 # Not a target:
 src/mem.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-04-15 10:39:50.9026876
-#  File has been updated.
-#  Successfully updated.
-
-# Not a target:
-.SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -365,14 +376,14 @@ src/mem.c:
 # Not a target:
 test/imp.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-15 11:13:06.7871494
+#  Last modified 2022-04-15 15:41:53.0497865
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-15 11:15:51.5366462
+#  Last modified 2022-04-15 15:41:53.0466911
 #  File has been updated.
 #  Successfully updated.
 
@@ -387,14 +398,14 @@ build: test/imp.c src/imp.o src/mem.o
 # Not a target:
 include/imp.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-15 11:00:39.5168604
+#  Last modified 2022-04-15 15:41:53.0475734
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/imp.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-14 18:33:41.1269467
+#  Last modified 2022-04-17 20:03:02.7377189
 #  File has been updated.
 #  Successfully updated.
 
@@ -413,51 +424,35 @@ clean:
 
 src/mem.o: src/mem.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-04-15 11:13:10.7340353
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 36):
 	@echo "Compilando $<"
 	@$(CC) $(CFLAGS) $(TESTFLAGS) -c -o $@ $<
 
 test/imp.o: test/imp.c src/imp.o src/mem.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-04-15 11:13:11.0509206
+#  Last modified 2022-04-15 15:42:05.0310162
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
 #  recipe to execute (from 'Makefile', line 21):
 	@echo "Compilando casos de prueba de lenguaje IMP"
 	@$(CC) $(CFLAGS) $(TESTFLAGS) -o $@ $^
 
 test-imp: test/imp.o
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
-# automatic
-# @ := test-imp
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := test/imp.o
-# automatic
-# | := 
-# automatic
-# < := test/imp.o
-# automatic
-# ^ := test/imp.o
-# automatic
-# ? := test/imp.o
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
 #  recipe to execute (from 'Makefile', line 18):
 	@./$<
 
 # files hash-table stats:
-# Load=14/1024=1%, Rehash=0, Collisions=0/43=0%
+# Load=14/1024=1%, Rehash=0, Collisions=0/42=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -467,9 +462,9 @@ test-imp: test/imp.o
 # strcache buffers: 1 (0) / strings = 30 / storage = 257 B / avg = 8 B
 # current buf: size = 8162 B / used = 257 B / count = 30 / avg = 8 B
 
-# strcache performance: lookups = 54 / hit rate = 44%
+# strcache performance: lookups = 53 / hit rate = 43%
 # hash-table stats:
-# Load=30/8192=0%, Rehash=0, Collisions=2/54=4%
-# Finished Make data base on Fri Apr 15 11:16:12 2022
+# Load=30/8192=0%, Rehash=0, Collisions=2/53=4%
+# Finished Make data base on Wed Apr 20 20:02:52 2022
 
  
