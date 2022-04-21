@@ -335,4 +335,9 @@ typedef struct pexp_t {
 //Selectores
 
 //Constructores
+void pexp_free(pexp_t *p) {
+    if (p == NULL) return;
+
+
+}
 
