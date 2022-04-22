@@ -406,7 +406,7 @@ pexp_t *pexp_make_sequence(pexp_t *pfirst, pexp_t *psecond) {
     return p;
 }
 
-pexp_t *pexp_make_cicle(bexp_t *condition, pexp_t *ptrue) {
+pexp_t *pexp_make_while(bexp_t *condition, pexp_t *ptrue) {
     pexp_t *p = (pexp_t *)malloc(sizeof(pexp_t));
     if (p == NULL) return NULL;
     p->type = PEXP_WHL;

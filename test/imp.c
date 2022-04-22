@@ -485,8 +485,77 @@ bool b_eval_neg() {
     return false;
 }
 
+/// PROBANDO CONSTRUCTORES DE P
+bool test_make_skip(){
+    pexp_t *p=pexp_make_skip();
+    check(p!=NULL, "Expected enough memory");
+    check(pexp_is_skip(p), "Expected skip type");
+    // Falta destructor
+    return true;
+fail:
+    return false;
+}
 
-
+bool test_make_assign(){
+    pexp_t *p=pexp_make_assign(aexp_make_num(2),
+                                aexp_make_num(3));
+    check(p!=NULL, "Expected enough memory");
+    check(pexp_is_assign(p), "Expected skip type"); 
+    check(pexp_index(p)!=NULL, "Expected enough memory + assignation on left pointer");
+    check(pexp_rvalue(p)!=NULL, "Expected enough memory + assignation on right pointer");
+    check(aexp_is_num(pexp_index(p)), "Expected numeric type on left");
+    check(aexp_is_num(pexp_rvalue(p)), "Expected numeric type on right");
+    check(aexp_num(pexp_index(p)) == 2, "Expected 2");
+    check(aexp_num(pexp_rvalue(p)) == 3, "Expected 3");
+    //Falta destructor
+    return true;
+fail:
+    return false;
+}
+bool test_make_sequence(){
+    pexp_t *p=pexp_make_sequence(pexp_make_skip(),
+                                pexp_make_skip());
+    check(p!=NULL, "Expected enough memory");
+    check(pexp_is_sequence(p), "Expected sequence type"); 
+    check(pexp_pfirst(p)!=NULL, "Expected enough memory + assignation on left pointer");
+    check(pexp_psecond(p)!=NULL, "Expected enough memory + assignation on right pointer");
+    check(pexp_is_skip(pexp_pfirst(p)), "Expected skip type on left");
+    check(pexp_is_skip(pexp_psecond(p)), "Expected skip type on right");
+    //Falta destructor
+    return true;
+fail:
+    return false;
+}
+bool test_make_while(){
+    pexp_t *p=pexp_make_while(bexp_make_or(bexp_make_true(), bexp_make_true()),
+                                pexp_make_skip());
+    check(p!=NULL, "Expected enough memory");
+    check(pexp_is_while(p), "Expected while type"); 
+    check(bexp_rvalue(p)!=NULL, "Expected enough memory + assignation on left pointer");
+    check(pexp_ptrue(p)!=NULL, "Expected enough memory + assignation on right pointer");
+    check(bexp_is_or(bexp_rvalue(p)), "Expected or type on left");
+    check(pexp_is_skip(pexp_ptrue(p)), "Expected skip type on right");
+    //Falta destructor
+    return true;
+fail:
+    return false;
+}
+bool test_make_conditional(){
+    pexp_t *p=pexp_make_conditional(bexp_make_or(bexp_make_true(), bexp_make_true()),
+                                        pexp_make_skip(), pexp_make_skip());
+    check(p!=NULL, "Expected enough memory");
+    check(pexp_is_conditional(p), "Expected skip type"); 
+    check(bexp_rvalue(p)!=NULL, "Expected enough memory + assignation on left pointer");
+    check(pexp_ptrue(p)!=NULL, "Expected enough memory + assignation on mid pointer")
+    check(pexp_pfalse(p)!=NULL, "Expected enough memory + assignation on right pointer");
+    check(bexp_is_or(bexp_rvalue(p)), "Expected or type on left");
+    check(pexp_is_skip(pexp_ptrue(p)), "Expected skip type on right");
+    check(pexp_is_skip(pexp_pfalse(p)), "Expected skip type on mid");
+    //Falta destructor
+    return true;
+fail:
+    return false;
+}
 ///  PROBANDO MEMORIA
 bool test_mem_assign_and_eval() {
     mem_t* m = mem_make();
@@ -571,7 +640,12 @@ int main() {
     run_test(b_eval_neg);
     fprintf(stderr, "- Probando memoria\n");
     run_test(test_mem_assign_and_eval);
-
+    fprintf(stderr, "- Probando expresiones de P\n");
+    run_test(test_make_skip);
+    run_test(test_make_assign);
+    run_test(test_make_sequence);
+    run_test(test_make_while);
+    run_test(test_make_conditional);
     //This is a test
     
 }
