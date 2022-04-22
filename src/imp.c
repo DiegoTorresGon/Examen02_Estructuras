@@ -430,3 +430,12 @@ void pexp_free(pexp_t *p) {
 
 }
 
+//Evaluador pexp_t
+pexp_t *pexp_t_eval(pexp_t *p)
+{
+    if(pexp_is_skip(p)) return pexp_make_skip();
+    if(pexp_is_ass(p)) return pexp_make_assign(p->index, p->rvalue);
+    if(pexp_is_sequence(p)) return pexp_make_sequence(p->pfirst, p->psecond);
+    if(pexp_is_while(p)) return pexp_make_cicle(p->condition, p->ptrue);
+    if(pexp_is_conditional(p)) return pexp_make_conditional(p->condition, p->ptrue, p->pfalse);
+}

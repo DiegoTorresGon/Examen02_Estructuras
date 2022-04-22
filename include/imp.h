@@ -189,4 +189,7 @@ pexp_t *pexp_make_sequence(pexp_t *pfirst, pexp_t *psecond);
 pexp_t *pexp_make_cicle(bexp_t *condition, pexp_t *ptrue);
 pexp_t *pexp_make_conditional(bexp_t *condition, pexp_t *ptrue, pexp_t *pfalse);
 
+//Evaluador
+pexp_t *pexp_t_eval(pexp_t *p);
+
 #endif  /* ED_IMP_H_ */
