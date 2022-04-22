@@ -190,6 +190,6 @@ pexp_t *pexp_make_cicle(bexp_t *condition, pexp_t *ptrue);
 pexp_t *pexp_make_conditional(bexp_t *condition, pexp_t *ptrue, pexp_t *pfalse);
 
 //Evaluador
-pexp_t *pexp_t_eval(pexp_t *p);
+pexp_t *pexp_t_eval(pexp_t *p, mem_t* m);
 
 #endif  /* ED_IMP_H_ */
