@@ -324,13 +324,59 @@ typedef struct pexp_t {
         struct{
             struct bexp_t *condition;
             struct pexp_t *ptrue;
-            struct pexp_t *pfalse; 
+            struct pexp_t *pfalse;
         };
     };
 } pexp_t;
 
 //Predicados
+bool pexp_is_skip(pexp_t *p) {
+    return p->type == PEXP_SKP;
+}
 
+bool pexp_is_assign(pexp_t *p) {
+    return p->type == PEXP_ASS;
+}
+
+bool pexp_is_sequence(pexp_t *p) {
+    return p->type == PEXP_SQN;
+}
+
+bool pexp_is_while(pexp_t *p) {
+    return p->type == PEXP_WHL;
+}
+
+bool pexp_is_conditional(pexp_t *p) {
+    return p->type == PEXP_CON;
+}
+
+pexp_t* pexp_pfirst(pexp_t *p){
+    return p->pfirst;
+}
+
+pexp_t* pexp_psecond(pexp_t *p){
+    return p->psecond;
+}
+
+pexp_t* pexp_pfalse(pexp_t *p){
+    return p->pfalse;
+}
+
+pexp_t* pexp_ptrue(pexp_t *p){
+    return p->ptrue;
+}
+
+aexp_t* pexp_index(pexp_t* p){
+    return p->index;
+}
+
+aexp_t* pexp_rvalue(pexp_t* p){
+    return p->rvalue;
+}
+
+bexp_t* bexp_rvalue(pexp_t* p){
+    return p->condition;
+}
 
 //Selectores
 pexp_t *aindex(pexp_t *p){
@@ -361,6 +407,7 @@ pexp_t *pfalse(pexp_t *p){
     if (p->type!=PEXP_CON) return NULL;
     return p->pfalse;
 }
+
 //Constructores
 
 pexp_t *pexp_make_skip() {

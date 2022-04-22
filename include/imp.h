@@ -165,8 +165,18 @@ typedef struct pexp_t pexp_t;
   Toda expresión de programa satisface únicamente uno de estos
   predicados.
  */
-
-
+bool pexp_is_skip(pexp_t *p);
+bool pexp_is_assign(pexp_t *p);
+bool pexp_is_sequence(pexp_t *p) ;
+bool pexp_is_while(pexp_t *p);
+bool pexp_is_conditional(pexp_t *p);
+pexp_t* pexp_pfirst(pexp_t *p);
+pexp_t* pexp_psecond(pexp_t *p);
+pexp_t* pexp_pfalse(pexp_t *p);
+pexp_t* pexp_ptrue(pexp_t *p);
+aexp_t* pexp_index(pexp_t* p);
+aexp_t* pexp_rvalue(pexp_t* p);
+bexp_t* bexp_rvalue(pexp_t* p);
 
 
 /*
