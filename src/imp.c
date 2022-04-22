@@ -350,6 +350,7 @@ bool pexp_is_conditional(pexp_t *p) {
     return p->type == PEXP_CON;
 }
 
+//Selectores
 pexp_t* pexp_pfirst(pexp_t *p){
     return p->pfirst;
 }
@@ -376,36 +377,6 @@ aexp_t* pexp_rvalue(pexp_t* p){
 
 bexp_t* bexp_rvalue(pexp_t* p){
     return p->condition;
-}
-
-//Selectores
-pexp_t *aindex(pexp_t *p){
-    if (p->type!=PEXP_ASS) return NULL;
-    return p->index;
-}
-pexp_t *arvalue(pexp_t *p){
-    if (p->type!=PEXP_ASS) return NULL;
-    return p->rvalue;
-}
-pexp_t *pfirst(pexp_t *p){
-    if (p->type!=PEXP_SQN) return NULL;
-    return p->pfirst;
-}
-pexp_t *psecond(pexp_t *p){
-    if (p->type!=PEXP_SQN) return NULL;
-    return p->psecond;
-}
-pexp_t *bcondition(pexp_t *p){
-    if (p->type!=PEXP_WHL||p->type!=PEXP_CON) return NULL;
-    return p->condition;
-}
-pexp_t *ptrue(pexp_t *p){
-    if (p->type!=PEXP_WHL||p->type!=PEXP_CON) return NULL;
-    return p->ptrue;
-}
-pexp_t *pfalse(pexp_t *p){
-    if (p->type!=PEXP_CON) return NULL;
-    return p->pfalse;
 }
 
 //Constructores
