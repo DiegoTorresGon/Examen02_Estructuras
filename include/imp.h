@@ -170,14 +170,6 @@ bool pexp_is_assign(pexp_t *p);
 bool pexp_is_sequence(pexp_t *p) ;
 bool pexp_is_while(pexp_t *p);
 bool pexp_is_conditional(pexp_t *p);
-pexp_t* pexp_pfirst(pexp_t *p);
-pexp_t* pexp_psecond(pexp_t *p);
-pexp_t* pexp_pfalse(pexp_t *p);
-pexp_t* pexp_ptrue(pexp_t *p);
-aexp_t* pexp_index(pexp_t* p);
-aexp_t* pexp_rvalue(pexp_t* p);
-bexp_t* bexp_rvalue(pexp_t* p);
-
 
 /*
   Los siguientes constructores permiten crear una expresion de Programa a partir de
