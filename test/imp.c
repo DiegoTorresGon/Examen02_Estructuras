@@ -565,6 +565,7 @@ fail:
     pexp_free(p);
     return false;
 }
+
 ///  PROBANDO MEMORIA
 bool test_mem_assign_and_eval() {
     mem_t* m = mem_make();
@@ -622,6 +623,66 @@ fail:
     return false;
 }
 
+pexp_t* factorial() {
+    pexp_t* fact = pexp_make_sequence(
+        pexp_make_assign(aexp_make_num(0), aexp_make_num(1)),
+        pexp_make_cicle(bexp_make_less(aexp_make_mem(aexp_make_num(2)), 
+            aexp_make_mem(aexp_make_num(1))),
+            pexp_make_sequence(
+                pexp_make_assign(aexp_make_num(2), aexp_make_add(aexp_make_mem(aexp_make_num(2)), aexp_make_num(1))),
+                pexp_make_assign(aexp_make_num(0), aexp_make_mul(aexp_make_mem(aexp_make_num(0)), aexp_make_mem(aexp_make_num(2))))
+            )
+        )
+    );   
+
+    return fact;
+}
+
+//PROBANDO EVALUADOR DE PROGRAMA
+bool p_eval() {
+
+    aexp_t* result = aexp_make_mem(aexp_make_num(0));
+    pexp_t* fact = factorial();
+
+    aexp_t* n = aexp_make_num(7);
+    aexp_t* input = aexp_make_num(1);
+
+    pexp_t* factorial_5 = pexp_make_sequence(
+        pexp_make_assign(aexp_make_num(0), aexp_make_num(1)),
+        pexp_make_cicle(bexp_make_less(aexp_make_mem(aexp_make_num(1)), 
+            aexp_make_num(5)),
+            pexp_make_sequence(
+                pexp_make_assign(aexp_make_num(1), aexp_make_add(aexp_make_mem(aexp_make_num(1)), aexp_make_num(1))),
+                pexp_make_assign(aexp_make_num(0), aexp_make_mul(aexp_make_mem(aexp_make_num(0)), aexp_make_mem(aexp_make_num(1))))
+            )
+        )
+    );
+
+    mem_t* m = mem_make();
+
+    check(m != NULL, "Mem shouldn't be NULL");
+    check(pexp_eval(factorial_5, m), "Evaluation of program should be succesful.");
+    check(aexp_eval(result, m) == 120, "Result should be equal to 120.");
+
+    mem_assign(m, input, n); 
+    check(pexp_eval(fact, m), "Should have succesful evaluation.");
+    check(aexp_eval(result, m) == 5040, "Result of 7! should be 5040.");
+
+    aexp_free(result);
+    pexp_free(factorial_5);
+    mem_free(m);
+    aexp_free(n);
+    aexp_free(input);
+    pexp_free(fact);
+
+    return true;
+fail:
+    aexp_free(result);
+    pexp_free(factorial_5);
+    mem_free(m);
+    return false;
+}
+
 int main() {
     fprintf(stderr, "- Probando expresiones aritméticas\n");
     run_test(a_make_num);
@@ -655,6 +716,6 @@ int main() {
     run_test(p_make_sequence);
     run_test(p_make_while);
     run_test(p_make_conditional);
-    //This is a test
+    run_test(p_eval);
     
 }

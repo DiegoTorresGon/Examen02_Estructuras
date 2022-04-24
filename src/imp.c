@@ -462,13 +462,26 @@ void pexp_free(pexp_t *p) {
 }
 
 //Evaluador pexp_t
-pexp_t *pexp_t_eval(pexp_t *p, mem_t* m)
+bool pexp_eval(pexp_t *p, mem_t* m)
 {
-    if(pexp_is_skip(p)) return pexp_t_eval(pexp_make_skip() ,m);
-    if(pexp_is_assign(p)) return pexp_t_eval(pexp_make_assign(p->index, p->rvalue), m);
-    if(pexp_is_sequence(p)) return pexp_t_eval(pexp_make_sequence(p->pfirst, p->psecond), m);
-    if(pexp_is_while(p)) return pexp_t_eval(pexp_make_cicle(p->condition, p->ptrue), m);
-    if(pexp_is_conditional(p)) return pexp_t_eval(pexp_make_conditional(p->condition, p->ptrue, p->pfalse), m);
+    if(pexp_is_assign(p)) {
+        if (mem_assign(m, pexp_aindex(p), pexp_arvalue(p)) == NULL) return false;
 
-    return NULL;
+    } else if(pexp_is_sequence(p)) {
+        if (!pexp_eval(pexp_pfirst(p), m))  return false;
+        if (!pexp_eval(pexp_psecond(p), m)) return false;
+
+    } else if(pexp_is_while(p)) {
+        while (bexp_eval(pexp_bcondition(p), m)) 
+            if (!pexp_eval(pexp_ptrue(p), m)) return false;
+
+    } else if(pexp_is_conditional(p)) {
+        pexp_t* to_run;
+        if (bexp_eval(pexp_bcondition(p), m)) to_run = pexp_ptrue(p);
+        else to_run = pexp_pfalse(p); 
+        
+        if(!pexp_eval(to_run, m)) return false;
+    }
+
+    return true;
 }
