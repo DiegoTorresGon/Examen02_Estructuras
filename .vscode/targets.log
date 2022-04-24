@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Apr 23 18:45:54 2022
+# Make data base, printed on Sun Apr 24 12:07:38 2022
 
 # Variables
 
@@ -34,6 +34,8 @@ XDG_SESSION_TYPE = x11
 VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
+# environment
+IM_CONFIG_PHASE = 1
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
@@ -49,11 +51,9 @@ SHELL = /bin/sh
 # environment
 SNAP_DATA = /var/snap/code/94
 # environment
-VTE_VERSION = 6003
-# environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:56354
+JOURNAL_STREAM = 8:49709
 # makefile (from 'Makefile', line 13)
 CFLAGS = -std=c18 -Wall -Wpedantic -Werror -Wextra -I$(INCDIR)/
 # environment
@@ -69,8 +69,9 @@ MAKEFILE_LIST :=  Makefile
 # makefile (from 'Makefile', line 3)
 TESTDIR = test
 # environment
-IM_CONFIG_PHASE = 1
+GIO_LAUNCHED_DESKTOP_FILE = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
+ 
 USERNAME = diego
 # environment
 MAKELEVEL := 0
@@ -83,13 +84,15 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 2071
+_ = /snap/code/94/usr/share/code/code
+# environment
+MANAGERPID = 2185
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 LC_NAME = es_MX.UTF-8
 # environment
-VSCODE_CWD = /media/Win_drive/Users/diego/Documents/Materias UNISON/Estructuras de Datos
+VSCODE_CWD = /home/diego
 # environment
 GSETTINGS_SCHEMA_DIR = /snap/code/94/usr/share/glib-2.0/schemas
 # default
@@ -99,7 +102,7 @@ PATH = /home/diego/anaconda3/bin:/home/diego/anaconda3/condabin:/home/diego/.car
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/diego-Nitro-AN515-53:@/tmp/.ICE-unix/2349,unix/diego-Nitro-AN515-53:/tmp/.ICE-unix/2349
+SESSION_MANAGER = local/diego-Nitro-AN515-53:@/tmp/.ICE-unix/2463,unix/diego-Nitro-AN515-53:/tmp/.ICE-unix/2463
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -121,25 +124,27 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 847d120534994fc0990a85d8a5fad449
+INVOCATION_ID = b01be1d0b4f24c4595281faa796ec815
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/94/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
-LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+LS_COLORS = 
 # environment
 XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
-# makefile (from 'Makefile', line 1)
-SRCDIR = src
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 6073
 # automatic
 %F = $(notdir $%)
 # environment
 DISPLAY = :1
 # environment
 CONDA_EXE = /home/diego/anaconda3/bin/conda
+# makefile (from 'Makefile', line 1)
+SRCDIR = src
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -149,7 +154,7 @@ PWD = /media/Win_drive/Users/diego/Documents/Materias UNISON/Estructuras de Dato
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 2316
+SSH_AGENT_PID = 2429
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -192,8 +197,6 @@ LC_TIME = es_MX.UTF-8
 SNAP_REAL_HOME = /home/diego
 # environment
 CONDA_DEFAULT_ENV = base
-# environment
-COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
 # default
@@ -203,13 +206,13 @@ QT_IM_MODULE = ibus
 # environment
 SNAP_USER_DATA = /home/diego/snap/code/94
 # environment
-SHLVL = 1
+SHLVL = 0
 # makefile (from 'Makefile', line 12)
 CC = gcc
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-41dd4ce4-0f3b-4758-b1fc-ebcbf4cbbbac.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-7708f6c5-e8c4-4b67-afcc-110114dd18ef.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -238,6 +241,8 @@ MAKE_COMMAND := make
 LANGUAGE = en
 # environment
 VSCODE_IPC_HOOK = /run/user/1000/vscode-37082df1-1.66.2-main.sock
+# environment
+BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # makefile
 MAKEFLAGS = pqrR
 # environment
@@ -274,12 +279,8 @@ LC_ALL = C
 CONDA_PYTHON_EXE = /home/diego/anaconda3/bin/python
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
-# environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/3583c98e_5ab8_44db_a491_8e490f32f890
 # automatic
 ^F = $(notdir $^)
-# environment
-GNOME_TERMINAL_SERVICE = :1.175
 # default
 SUFFIXES := 
 # environment
@@ -297,18 +298,15 @@ GJS_DEBUG_OUTPUT = stderr
 # default
 .RECIPEPREFIX := 
 # environment
- 
 LC_ADDRESS = es_MX.UTF-8
 # environment
 LANG = C
 # environment
-TERM = xterm-256color
-# environment
-VSCODE_PID = 7269
+VSCODE_PID = 6124
 # environment
 _CE_CONDA = 
 # variable set hash-table stats:
-# Load=148/1024=14%, Rehash=0, Collisions=23/194=12%
+# Load=147/1024=14%, Rehash=0, Collisions=45/189=24%
 
 # Pattern-specific Variable Values
 
@@ -335,27 +333,9 @@ src/%.o: src/%.c
 src/imp.o: src/imp.c include/imp.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'imp'
-#  File does not exist.
+#  Last modified 2022-04-23 18:53:54.6825946
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := src/imp.o
-# automatic
-# % := 
-# automatic
-# * := imp
-# automatic
-# + := src/imp.c include/imp.h
-# automatic
-# | := 
-# automatic
-# < := src/imp.c
-# automatic
-# ^ := src/imp.c include/imp.h
-# automatic
-# ? := src/imp.c include/imp.h
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/18=6%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 29):
 	@echo "Compilando $<"
 	@$(CC) $(CFLAGS) $(TESTFLAGS) -c -o $@ $<
@@ -367,10 +347,17 @@ all: test-imp
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
 
 # Not a target:
 src/mem.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-23 18:45:43.1027224
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -386,6 +373,7 @@ test/imp.c:
 Makefile:
 #  Implicit rule search has been done.
 #  Last modified 2022-04-23 18:45:43.0986184
+ 
 #  File has been updated.
 #  Successfully updated.
 
@@ -407,7 +395,7 @@ include/imp.h:
 # Not a target:
 src/imp.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-23 18:45:43.1019156
+#  Last modified 2022-04-23 18:53:51.9287871
 #  File has been updated.
 #  Successfully updated.
 
@@ -426,35 +414,51 @@ clean:
 
 src/mem.o: src/mem.c
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Last modified 2022-04-23 18:53:54.7415176
+#  File has been updated.
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 36):
 	@echo "Compilando $<"
 	@$(CC) $(CFLAGS) $(TESTFLAGS) -c -o $@ $<
 
 test/imp.o: test/imp.c src/imp.o src/mem.o
 #  Implicit rule search has not been done.
-#  File does not exist.
+#  Last modified 2022-04-23 18:53:55.0409947
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 21):
 	@echo "Compilando casos de prueba de lenguaje IMP"
 	@$(CC) $(CFLAGS) $(TESTFLAGS) -o $@ $^
 
 test-imp: test/imp.o
 #  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
+# automatic
+# @ := test-imp
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := test/imp.o
+# automatic
+# | := 
+# automatic
+# < := test/imp.o
+# automatic
+# ^ := test/imp.o
+# automatic
+# ? := test/imp.o
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
 #  recipe to execute (from 'Makefile', line 18):
 	@./$<
 
 # files hash-table stats:
-# Load=14/1024=1%, Rehash=0, Collisions=0/42=0%
+# Load=14/1024=1%, Rehash=0, Collisions=0/43=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -464,9 +468,9 @@ test-imp: test/imp.o
 # strcache buffers: 1 (0) / strings = 30 / storage = 257 B / avg = 8 B
 # current buf: size = 8162 B / used = 257 B / count = 30 / avg = 8 B
 
-# strcache performance: lookups = 53 / hit rate = 43%
+# strcache performance: lookups = 54 / hit rate = 44%
 # hash-table stats:
-# Load=30/8192=0%, Rehash=0, Collisions=2/53=4%
-# Finished Make data base on Sat Apr 23 18:45:54 2022
+# Load=30/8192=0%, Rehash=0, Collisions=2/54=4%
+# Finished Make data base on Sun Apr 24 12:07:38 2022
 
  

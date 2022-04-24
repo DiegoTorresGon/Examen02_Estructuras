@@ -203,7 +203,8 @@ pexp_t *pexp_pfalse(pexp_t *p);
 
 // Destructor
 void pexp_free(pexp_t *p);
+
 //Evaluador
-pexp_t *pexp_t_eval(pexp_t *p, mem_t* m);
+bool pexp_eval(pexp_t *p, mem_t* m);
 
 #endif  /* ED_IMP_H_ */
