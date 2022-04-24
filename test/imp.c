@@ -668,6 +668,19 @@ bool p_eval() {
     check(pexp_eval(fact, m), "Should have succesful evaluation.");
     check(aexp_eval(result, m) == 5040, "Result of 7! should be 5040.");
 
+    uint64_t test_fact = 1;
+    for (uint64_t i = 1; i <= 2; ++i) {
+        test_fact *= i;
+        aexp_free(n);
+        mem_free(m);
+        m = mem_make();
+        n = aexp_make_num(i);
+        mem_assign(m, input, n);
+
+        check(pexp_eval(fact, m), "Should have succesful evaluation.");
+        check(aexp_eval(result, m) == test_fact, "Result isn't right.");
+    } 
+
     aexp_free(result);
     pexp_free(factorial_5);
     mem_free(m);
@@ -680,6 +693,9 @@ fail:
     aexp_free(result);
     pexp_free(factorial_5);
     mem_free(m);
+    aexp_free(n);
+    aexp_free(input);
+    pexp_free(fact);
     return false;
 }
 
