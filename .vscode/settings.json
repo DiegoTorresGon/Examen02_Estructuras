@@ -7,5 +7,24 @@
             "binaryPath": "/media/Win_drive/Users/diego/Documents/Materias UNISON/Estructuras de Datos/Examen02_Estructuras/test/imp.o",
             "binaryArgs": []
         }
-    ]
+    ],
+    "files.associations": {
+        "__bit_reference": "c",
+        "__functional_base": "c",
+        "__node_handle": "c",
+        "algorithm": "c",
+        "bitset": "c",
+        "chrono": "c",
+        "__memory": "c",
+        "functional": "c",
+        "iterator": "c",
+        "limits": "c",
+        "optional": "c",
+        "ratio": "c",
+        "system_error": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "vector": "c",
+        "memory": "c"
+    }
 }

@@ -324,15 +324,34 @@ typedef struct pexp_t {
         struct{
             struct bexp_t *condition;
             struct pexp_t *ptrue;
-            struct pexp_t *pfalse; 
+            struct pexp_t *pfalse;
         };
     };
 } pexp_t;
 
 //Predicados
+bool pexp_is_skip(pexp_t *p) {
+    return p->type == PEXP_SKP;
+}
 
+bool pexp_is_assign(pexp_t *p) {
+    return p->type == PEXP_ASS;
+}
+
+bool pexp_is_sequence(pexp_t *p) {
+    return p->type == PEXP_SQN;
+}
+
+bool pexp_is_while(pexp_t *p) {
+    return p->type == PEXP_WHL;
+}
+
+bool pexp_is_conditional(pexp_t *p) {
+    return p->type == PEXP_CON;
+}
 
 //Selectores
+
 aexp_t *pexp_aindex(pexp_t *p){
     if (p->type!=PEXP_ASS) return NULL;
     return p->index;
@@ -349,6 +368,7 @@ pexp_t *pexp_psecond(pexp_t *p){
     if (p->type!=PEXP_SQN) return NULL;
     return p->psecond;
 }
+
 bexp_t *pexp_bcondition(pexp_t *p){
     if (p->type!=PEXP_WHL||p->type!=PEXP_CON) return NULL;
     return p->condition;
@@ -361,8 +381,8 @@ pexp_t *pexp_pfalse(pexp_t *p){
     if (p->type!=PEXP_CON) return NULL;
     return p->pfalse;
 }
-//Constructores
 
+//Constructores
 pexp_t *pexp_make_skip() {
     pexp_t *p = (pexp_t *)malloc(sizeof(pexp_t));
     if (p == NULL) return NULL;
@@ -393,7 +413,7 @@ pexp_t *pexp_make_cicle(bexp_t *condition, pexp_t *ptrue) {
     if (p == NULL) return NULL;
     p->type = PEXP_WHL;
     p->condition = condition;
-    p->ptrue= ptrue;
+    p->ptrue = ptrue;
     return p;
 }
 
@@ -410,5 +430,44 @@ pexp_t *pexp_make_conditional(bexp_t *condition, pexp_t *ptrue, pexp_t *pfalse) 
 void pexp_free(pexp_t *p) {
     if (p == NULL) return;
 
+    if (pexp_is_sequence(p)) {
+        pexp_free(pfirst(p));
+        pexp_free(psecond(p));
+        free(p);
+        return;
+    }
+
+    if (pexp_is_assign(p)) {
+        aexp_free(arvalue(p));
+        aexp_free(aindex(p));
+        free(p);
+        return;
+    }
+
+    if (pexp_is_conditional(p)) {
+        bexp_free(bcondition(p));
+        pexp_free(ptrue(p));
+        pexp_free(pfalse(p));
+        free(p);
+        return;
+    }
+    
+    if (pexp_is_while(p)) {
+        bexp_free(bcondition(p));
+        pexp_free(ptrue(p));
+        free(p);
+        return;
+    }
+
+    free(p);
 }
 
+//Evaluador pexp_t
+pexp_t *pexp_t_eval(pexp_t *p, mem_t* m)
+{
+    if(pexp_is_skip(p)) return pexp_t_eval(pexp_make_skip() ,m);
+    if(pexp_is_ass(p)) return pexp_t_eval(pexp_make_assign(p->index, p->rvalue), m);
+    if(pexp_is_sequence(p)) return pexp_t_eval(pexp_make_sequence(p->pfirst, p->psecond), m);
+    if(pexp_is_while(p)) return pexp_t_eval(pexp_make_cicle(p->condition, p->ptrue), m);
+    if(pexp_is_conditional(p)) return pexp_t_eval(pexp_make_conditional(p->condition, p->ptrue, p->pfalse), m);
+}
