@@ -1,6 +1,5 @@
 #include <mem.h>
 #include <imp.h>
-
 /***************************/
 /* EXPRESIONES ARITMÉTICAS */
 /***************************/
@@ -370,11 +369,11 @@ pexp_t *pexp_psecond(pexp_t *p){
 }
 
 bexp_t *pexp_bcondition(pexp_t *p){
-    if (p->type!=PEXP_WHL||p->type!=PEXP_CON) return NULL;
+    if (p->type!=PEXP_WHL&&p->type!=PEXP_CON) return NULL;
     return p->condition;
 }
 pexp_t *pexp_ptrue(pexp_t *p){
-    if (p->type!=PEXP_WHL||p->type!=PEXP_CON) return NULL;
+    if (p->type!=PEXP_WHL&&p->type!=PEXP_CON) return NULL;
     return p->ptrue;
 }
 pexp_t *pexp_pfalse(pexp_t *p){
@@ -468,7 +467,7 @@ pexp_t *pexp_t_eval(pexp_t *p, mem_t* m)
     if(pexp_is_skip(p)) return pexp_t_eval(pexp_make_skip() ,m);
     if(pexp_is_assign(p)) return pexp_t_eval(pexp_make_assign(p->index, p->rvalue), m);
     if(pexp_is_sequence(p)) return pexp_t_eval(pexp_make_sequence(p->pfirst, p->psecond), m);
-    if(pexp_is_while(p)) return pexp_t_eval(pexp_make_cicle(p->condition, p->ptrue), m);
+    if(pexp_is_while(p)) return pexp_t_eval(pexp_make_while(p->condition, p->ptrue), m);
     if(pexp_is_conditional(p)) return pexp_t_eval(pexp_make_conditional(p->condition, p->ptrue, p->pfalse), m);
 
     return NULL;
