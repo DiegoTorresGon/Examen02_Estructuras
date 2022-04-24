@@ -1,6 +1,5 @@
 #include <mem.h>
 #include <imp.h>
-
 /***************************/
 /* EXPRESIONES ARITMÉTICAS */
 /***************************/
@@ -370,11 +369,11 @@ pexp_t *pexp_psecond(pexp_t *p){
 }
 
 bexp_t *pexp_bcondition(pexp_t *p){
-    if (p->type!=PEXP_WHL||p->type!=PEXP_CON) return NULL;
+    if (p->type!=PEXP_WHL&&p->type!=PEXP_CON) return NULL;
     return p->condition;
 }
 pexp_t *pexp_ptrue(pexp_t *p){
-    if (p->type!=PEXP_WHL||p->type!=PEXP_CON) return NULL;
+    if (p->type!=PEXP_WHL&&p->type!=PEXP_CON) return NULL;
     return p->ptrue;
 }
 pexp_t *pexp_pfalse(pexp_t *p){

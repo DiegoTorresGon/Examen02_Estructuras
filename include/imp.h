@@ -201,6 +201,8 @@ bexp_t *pexp_bcondition(pexp_t *p);
 pexp_t *pexp_ptrue(pexp_t *p);
 pexp_t *pexp_pfalse(pexp_t *p);
 
+// Destructor
+void pexp_free(pexp_t *p);
 //Evaluador
 pexp_t *pexp_t_eval(pexp_t *p, mem_t* m);
 
