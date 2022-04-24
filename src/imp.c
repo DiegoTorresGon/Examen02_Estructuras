@@ -464,18 +464,18 @@ void pexp_free(pexp_t *p) {
 //Evaluador pexp_t
 bool pexp_eval(pexp_t *p, mem_t* m)
 {
-    if(pexp_is_assign(p)) {
+    if (pexp_is_assign(p)) {
         if (mem_assign(m, pexp_aindex(p), pexp_arvalue(p)) == NULL) return false;
 
-    } else if(pexp_is_sequence(p)) {
+    } else if (pexp_is_sequence(p)) {
         if (!pexp_eval(pexp_pfirst(p), m))  return false;
         if (!pexp_eval(pexp_psecond(p), m)) return false;
 
-    } else if(pexp_is_while(p)) {
+    } else if (pexp_is_while(p)) {
         while (bexp_eval(pexp_bcondition(p), m)) 
             if (!pexp_eval(pexp_ptrue(p), m)) return false;
 
-    } else if(pexp_is_conditional(p)) {
+    } else if (pexp_is_conditional(p)) {
         pexp_t* to_run;
         if (bexp_eval(pexp_bcondition(p), m)) to_run = pexp_ptrue(p);
         else to_run = pexp_pfalse(p); 
