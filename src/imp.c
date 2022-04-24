@@ -431,30 +431,30 @@ void pexp_free(pexp_t *p) {
     if (p == NULL) return;
 
     if (pexp_is_sequence(p)) {
-        pexp_free(pfirst(p));
-        pexp_free(psecond(p));
+        pexp_free(pexp_pfirst(p));
+        pexp_free(pexp_psecond(p));
         free(p);
         return;
     }
 
     if (pexp_is_assign(p)) {
-        aexp_free(arvalue(p));
-        aexp_free(aindex(p));
+        aexp_free(pexp_arvalue(p));
+        aexp_free(pexp_aindex(p));
         free(p);
         return;
     }
 
     if (pexp_is_conditional(p)) {
-        bexp_free(bcondition(p));
-        pexp_free(ptrue(p));
-        pexp_free(pfalse(p));
+        bexp_free(pexp_bcondition(p));
+        pexp_free(pexp_ptrue(p));
+        pexp_free(pexp_pfalse(p));
         free(p);
         return;
     }
     
     if (pexp_is_while(p)) {
-        bexp_free(bcondition(p));
-        pexp_free(ptrue(p));
+        bexp_free(pexp_bcondition(p));
+        pexp_free(pexp_ptrue(p));
         free(p);
         return;
     }
@@ -466,8 +466,10 @@ void pexp_free(pexp_t *p) {
 pexp_t *pexp_t_eval(pexp_t *p, mem_t* m)
 {
     if(pexp_is_skip(p)) return pexp_t_eval(pexp_make_skip() ,m);
-    if(pexp_is_ass(p)) return pexp_t_eval(pexp_make_assign(p->index, p->rvalue), m);
+    if(pexp_is_assign(p)) return pexp_t_eval(pexp_make_assign(p->index, p->rvalue), m);
     if(pexp_is_sequence(p)) return pexp_t_eval(pexp_make_sequence(p->pfirst, p->psecond), m);
     if(pexp_is_while(p)) return pexp_t_eval(pexp_make_cicle(p->condition, p->ptrue), m);
     if(pexp_is_conditional(p)) return pexp_t_eval(pexp_make_conditional(p->condition, p->ptrue, p->pfalse), m);
+
+    return NULL;
 }
