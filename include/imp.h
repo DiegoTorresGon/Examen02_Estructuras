@@ -178,7 +178,7 @@ bool pexp_is_conditional(pexp_t *p);
 pexp_t *pexp_make_skip();
 pexp_t *pexp_make_assign(aexp_t *index, aexp_t *rvalue);
 pexp_t *pexp_make_sequence(pexp_t *pfirst, pexp_t *psecond);
-pexp_t *pexp_make_while(bexp_t *condition, pexp_t *ptrue);
+pexp_t *pexp_make_cicle(bexp_t *condition, pexp_t *ptrue);
 pexp_t *pexp_make_conditional(bexp_t *condition, pexp_t *ptrue, pexp_t *pfalse);
 
 
