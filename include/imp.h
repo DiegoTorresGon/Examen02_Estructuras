@@ -170,14 +170,6 @@ bool pexp_is_assign(pexp_t *p);
 bool pexp_is_sequence(pexp_t *p) ;
 bool pexp_is_while(pexp_t *p);
 bool pexp_is_conditional(pexp_t *p);
-pexp_t* pexp_pfirst(pexp_t *p);
-pexp_t* pexp_psecond(pexp_t *p);
-pexp_t* pexp_pfalse(pexp_t *p);
-pexp_t* pexp_ptrue(pexp_t *p);
-aexp_t* pexp_index(pexp_t* p);
-aexp_t* pexp_rvalue(pexp_t* p);
-bexp_t* bexp_rvalue(pexp_t* p);
-
 
 /*
   Los siguientes constructores permiten crear una expresion de Programa a partir de
@@ -188,5 +180,28 @@ pexp_t *pexp_make_assign(aexp_t *index, aexp_t *rvalue);
 pexp_t *pexp_make_sequence(pexp_t *pfirst, pexp_t *psecond);
 pexp_t *pexp_make_while(bexp_t *condition, pexp_t *ptrue);
 pexp_t *pexp_make_conditional(bexp_t *condition, pexp_t *ptrue, pexp_t *pfalse);
+
+
+/*
+  Los siguientes métodos son selectores para acceder a los miembros internos
+  de una expresión de programa. 
+
+  pexp_pfirst y pexp_psecond corresponden a expresiones de tipo secuencia.
+
+  pexp_aindex y pexp_arvalue corresponden a expresiones de tipo asignación.
+
+  pexp_bcondition, pexp_ptrue y pexp_pfalse corresponden a un programa tipo ciclo
+  y las primeras dos a un programa tipo condicional.
+ */
+aexp_t *pexp_aindex(pexp_t *p);
+aexp_t *pexp_arvalue(pexp_t *p);
+pexp_t *pexp_psecond(pexp_t *p);
+pexp_t *pexp_pfirst(pexp_t *p);
+bexp_t *pexp_bcondition(pexp_t *p);
+pexp_t *pexp_ptrue(pexp_t *p);
+pexp_t *pexp_pfalse(pexp_t *p);
+
+//Evaluador
+pexp_t *pexp_t_eval(pexp_t *p, mem_t* m);
 
 #endif  /* ED_IMP_H_ */
