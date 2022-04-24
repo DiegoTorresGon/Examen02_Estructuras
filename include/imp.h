@@ -201,10 +201,21 @@ bexp_t *pexp_bcondition(pexp_t *p);
 pexp_t *pexp_ptrue(pexp_t *p);
 pexp_t *pexp_pfalse(pexp_t *p);
 
-// Destructor
+/**
+ * @brief Libera la memoria dentro del programa p, incluyendo a sus hijos.
+ * 
+ * @param p Programa a liberar.
+ */
 void pexp_free(pexp_t *p);
 
-//Evaluador
+/**
+ * @brief Evalúa un programa con todas sus instrucciones sobre la memoria m.
+ * 
+ * @param p Programa a evaluar. 
+ * @param m Memoria sobre la cual realizar operaciones. 
+ * @return true Si todo salió bien. 
+ * @return false Si no todo salió bien. 
+ */
 bool pexp_eval(pexp_t *p, mem_t* m);
 
 #endif  /* ED_IMP_H_ */

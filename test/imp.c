@@ -669,7 +669,7 @@ bool p_eval() {
     check(aexp_eval(result, m) == 5040, "Result of 7! should be 5040.");
 
     uint64_t test_fact = 1;
-    for (uint64_t i = 1; i <= 2; ++i) {
+    for (uint64_t i = 1; i <= 20; ++i) {
         test_fact *= i;
         aexp_free(n);
         mem_free(m);
@@ -700,6 +700,7 @@ fail:
 }
 
 int main() {
+
     fprintf(stderr, "- Probando expresiones aritméticas\n");
     run_test(a_make_num);
     run_test(a_make_mem);
@@ -711,6 +712,7 @@ int main() {
     run_test(a_eval_add);
     run_test(a_eval_sub);
     run_test(a_eval_mul);
+
     fprintf(stderr, "- Probando expresiones booleanas\n");
     run_test(b_make_truefalse);
     run_test(b_make_equal);
@@ -724,8 +726,10 @@ int main() {
     run_test(b_eval_and);
     run_test(b_eval_or);
     run_test(b_eval_neg);
+
     fprintf(stderr, "- Probando memoria\n");
     run_test(test_mem_assign_and_eval);
+
     fprintf(stderr, "- Probando expresiones de P\n");
     run_test(p_make_skip);
     run_test(p_make_assign);
@@ -733,5 +737,4 @@ int main() {
     run_test(p_make_while);
     run_test(p_make_conditional);
     run_test(p_eval);
-    
 }
