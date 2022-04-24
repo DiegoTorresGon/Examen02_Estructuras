@@ -532,7 +532,7 @@ fail:
 bool p_make_while(){
     bexp_t* tru = bexp_make_true();
     bexp_t* or = bexp_make_or(tru, tru);
-    pexp_t *p=pexp_make_while(or,
+    pexp_t *p=pexp_make_cicle(or,
                                 pexp_make_skip());
     check(p!=NULL, "Expected enough memory");
     check(pexp_is_while(p), "Expected while type"); 
