@@ -695,6 +695,47 @@ fail:
     return false;
 }
 
+bool pexp_sum_prog() {
+
+    mem_t* m = mem_make();
+
+    aexp_t* result = aexp_make_mem(aexp_make_num(0));
+    aexp_t* input = aexp_make_num(1);
+    aexp_t* n = NULL;
+
+    pexp_t* sum_to_n = pexp_make_sequence(
+        pexp_make_assign(aexp_make_num(0), aexp_make_num(0)),
+        pexp_make_cicle(bexp_make_less(aexp_make_num(0), 
+            aexp_make_mem(aexp_make_num(1))),
+            pexp_make_sequence(
+                pexp_make_assign(aexp_make_num(0), aexp_make_add(aexp_make_mem(aexp_make_num(0)), aexp_make_mem(aexp_make_num(1)))),
+                pexp_make_assign(aexp_make_num(1), aexp_make_sub(aexp_make_mem(aexp_make_num(1)), aexp_make_num(1)))
+            )
+        )
+    );
+    
+    for (uint64_t i = 1; i < 100; ++i) {
+        n = aexp_make_num(i);
+        mem_assign(m, input, n);
+
+        pexp_eval(sum_to_n, m);
+
+        check(mem_eval(m, result) == (i * (i + 1)) / 2, "Sum isn't right.");
+    }
+
+    mem_free(m);
+    aexp_free(result);
+    aexp_free(input);
+    aexp_free(n);
+    return true;
+fail:
+    mem_free(m);
+    aexp_free(result);
+    aexp_free(input);
+    aexp_free(n);
+    return false;
+}
+
 int main() {
 
     fprintf(stderr, "- Probando expresiones aritméticas\n");
