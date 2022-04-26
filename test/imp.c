@@ -664,10 +664,6 @@ bool p_eval() {
     check(pexp_eval(factorial_5, m), "Evaluation of program should be succesful.");
     check(aexp_eval(result, m) == 120, "Result should be equal to 120.");
 
-    mem_assign(m, input, n); 
-    check(pexp_eval(fact, m), "Should have succesful evaluation.");
-    check(aexp_eval(result, m) == 5040, "Result of 7! should be 5040.");
-
     uint64_t test_fact = 1;
     for (uint64_t i = 1; i <= 20; ++i) {
         test_fact *= i;
